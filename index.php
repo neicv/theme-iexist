@@ -32,7 +32,8 @@ return [
     'positions' => [
 
         'navbar' => 'Navbar',
-		'header_social' => 'Header Social',
+	    'header_search' => 'Header Search',
+	    'header_social' => 'Header Social',
         'top' => 'Top',
         'sidebar' => 'Sidebar',
         'bottom' => 'Bottom',

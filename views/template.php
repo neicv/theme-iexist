@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= $view->render('head') ?>
         <?php $view->style('theme', 'theme:css/theme.css') ?>
-        <?php $view->script('theme', 'theme:js/theme.js', ['uikit-sticky',  'uikit-lightbox']) ?>
+        <?php $view->script('theme', 'theme:js/theme.js', ['uikit-sticky',  'uikit-lightbox',  'uikit-parallax', 'uikit-slider', 'uikit-grid', 'uikit-accordion', 'animtedtext']) ?>
     </head>
     <body>
 
@@ -16,7 +16,7 @@
                 <?php if ($params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
                 <div class="tm-header uk-flex-column">
 
-                    <!--<nav class="uk-navbar <?= ($params['contrast']) ? 'tm-navbar-contrast' : '' ?>">-->
+     
 					<nav class="uk-navbar-wrapper <?= ($params['contrast']) ? 'tm-navbar-contrast' : '' ?>">
 					
 						 <div class="tm-navbar uk-navbar tm-navbar-single">
@@ -42,9 +42,20 @@
 								</div>
 								<?php endif ?>
 
-								<?php if ($view->position()->exists('header-social')  || $view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
+								<?php if ($view->position()->exists('header-search')  || $view->position()->exists('header-social')  || $view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
 								<div class="tm-navbar-right uk-flex uk-flex-middle">
 
+									<?php if ($view->position()->exists('header_search')) : ?>
+									<div class="tm-search uk-hidden-small">
+									   <div data-uk-dropdown="{mode:'click', pos:'left-center'}">
+										   <button class="tm-navbar-button tm-search-button"></button>
+										   <div class="uk-dropdown-blank tm-navbar-dropdown">
+											   <?= $view->position('header_search', 'position-blank.php') ?>
+										   </div>
+									   </div>
+									</div>
+									<?php endif ?>
+									
 									<?php if ($view->position()->exists('header_social')) : ?>
 									<div class="tm-navbar-social uk-hidden-small">
 									   <div data-uk-dropdown="{mode:'click', pos:'left-center'}">

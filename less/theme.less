@@ -170,7 +170,11 @@ html { overflow-y: scroll; }
 
 }
 
+//
+// Icon
+//
 
+@icon-hover-color:                              @global-highlight-color;
 
 
 
@@ -242,6 +246,17 @@ html { overflow-y: scroll; }
 @theme-navbar-button-height:                    35px;
 @theme-navbar-dropdown-background:              @navbar-background; // (navbar.less)
 @theme-navbar-dropdown-width:                   200px;
+@theme-navbar-icon-search:                      "\e036";
+@theme-navbar-icon-more:                        "\e900";
+
+
+//
+// Avanti Grid
+//
+
+@theme-badge-muted-background:                  @global-light-background;
+@theme-badge-muted-color:                       @global-highlight-color;
+@theme-grid-divider-border:                     @grid-divider-border;
 
 
 //
@@ -305,6 +320,10 @@ html { overflow-y: scroll; }
 @dropdown-navbar-shadow:                        @dropdown-shadow;
 
 
+
+
+
+
 // Navbar gutter for large view ports
 @media (min-width: @breakpoint-large) {
 
@@ -349,6 +368,7 @@ html { overflow-y: scroll; }
             color: @theme-navbar-icon-color;
             -webkit-transition: @global-transition;
             transition: @global-transition;
+			
         }
 
         // Hover
@@ -372,4 +392,128 @@ html { overflow-y: scroll; }
 
 }
 
+// Navbar search + more
+.tm-navbar .tm-search,
+.tm-navbar .tm-more {
 
+    // Search button
+    .tm-navbar-button {
+
+        width: @theme-navbar-button-width;
+        height: @theme-navbar-button-height;
+        line-height: 1;
+        background: none;
+        border: none;
+        outline: 0;
+        cursor: pointer;
+
+        // Setting the icon
+        &::before {
+            font-family: @global-theme-icon-font-family;
+            font-size: @theme-navbar-icon-size;
+            color: @theme-navbar-icon-color;
+            -webkit-transition: @global-transition;
+            transition: @global-transition;
+        }
+
+        // Hover
+        &:hover::before { color: @theme-navbar-icon-hover-color; }
+
+        // Onclick
+        &:focus::before,
+        &:active::before { color: @theme-navbar-icon-click-color; }
+
+    }
+
+    // Icons
+    .tm-search-button::before { content: @theme-navbar-icon-search; }
+    .tm-more-button::before { content: @theme-navbar-icon-more; }
+
+    // Dropdown style
+    .tm-navbar-dropdown {
+        width: @theme-navbar-dropdown-width;
+        background-color: @theme-navbar-dropdown-background;
+    }
+
+}
+
+// Hiding the default icon
+.tm-navbar .tm-search .uk-search::before { display: none; }
+
+// Search field width
+.tm-navbar .tm-search .tm-search-dropdown .uk-search-field,
+.tm-navbar .tm-search .tm-search-dropdown .uk-search-field:focus { width: @theme-navbar-dropdown-width; }
+
+// Style modifications
+// ==========================================================================
+
+.body-style ();
+
+.body-style () when (@global-style = 'default') {  //modern
+
+    // uk-block-primary
+    .uk-block-primary.uk-contrast { color: @global-contrast-color; }
+
+    // Footer tm-brand color
+    .tm-footer .tm-brand { color: @global-contrast-color; }
+
+} 
+
+
+//
+// Avanti Grid
+//
+
+// Adding a border and gutter
+.tm-grid-divider > *:not(:first-child):not(.uk-row-first) { border-left: @grid-divider-border-width solid @theme-grid-divider-border; }
+
+// Border color when uk-contrast is active
+.uk-contrast .tm-grid-divider > *:not(:first-child):not(.uk-row-first) { border-left-color: @contrast-base-hr-border; }
+
+.tm-grid-divider:not(:empty) {
+    margin-left: -@grid-gutter-horizontal;
+    margin-right: -@grid-gutter-horizontal;
+}
+
+.tm-grid-divider > * {
+    padding-left: @grid-gutter-horizontal;
+    padding-right: @grid-gutter-horizontal;
+} 
+
+//
+// Search
+//
+
+/* @dropdown-search-background:                    @dropdown-navbar-background;
+@dropdown-search-color:                         @navbar-nav-color;
+
+@nav-search-color:                              @global-color;
+@nav-search-active-color:                       @global-primary-color;
+@nav-search-divider-border:                     @global-border;
+@nav-search-nested-color:                       @navbar-nav-color;
+@nav-search-nested-hover-color:                 @navbar-nav-hover-color;
+
+@navbar-search-color:                           @global-color;
+@navbar-search-placeholder-color:               @global-muted-color;
+@navbar-search-icon-color:                      @global-highlight-color;
+
+@search-dropdown-shadow:                        @dropdown-navbar-shadow;
+
+@offcanvas-search-shadow:                       @nav-offcanvas-shadow;
+ */
+//
+// Utitlity
+//
+
+@utility-font-rendering-webkit:                 subpixel-antialiased;
+
+
+// Theme variables
+// ========================================================================
+
+//
+// Navbar
+//
+
+@theme-navbar-icon-color:                        fade(@contrast-color, 70%); //@global-highlight-color;
+@theme-navbar-icon-click-color:                 @global-primary-color; 
