@@ -1,0 +1,22 @@
+{
+    "name": "friendlyit/theme-iexist",
+    "type": "pagekit-theme",
+    "version": "1.0.1",
+    "title": "I Exist",
+    "description": "A great lifestyle theme to showcase images and start blogging.",
+    "license": "MIT",
+    "copyright": "(c) 2017 Friendly-IT",
+    "authors": [
+        {
+            "name": "Friendly-IT",
+            "email": "info@friendly-it.ru",
+            "homepage": "http://pagekit.friendly-it.ru"
+        }
+    ],
+    "extra": {
+        "image": "image.jpg"
+    },
+    "archive": {
+        "exclude": ["!/app", "!/css", "/app/assets"]
+    }
+}

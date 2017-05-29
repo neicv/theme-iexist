@@ -1,0 +1,3 @@
+Прозрачность uk-article (фон позиций - белый по умолчанию(#fff) - замена на слегка прозрачный белый)
+файл :	\theme-cards\less\uikit\variables.less
+@global-background:                             rgba(255, 255, 255, 0.90);//#fff; 
