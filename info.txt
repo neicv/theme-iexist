@@ -1,3 +1,7 @@
 Прозрачность uk-article (фон позиций - белый по умолчанию(#fff) - замена на слегка прозрачный белый)
 файл :	\theme-cards\less\uikit\variables.less
 @global-background:                             rgba(255, 255, 255, 0.90);//#fff; 
+
+
+30.05.2017
+Замена form.less на от YuoTheme Uniq  - для создания формы обратной связи как: Uniq - Features - Contact
