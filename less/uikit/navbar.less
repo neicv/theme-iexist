@@ -7,67 +7,92 @@
 // Variables
 // ========================================================================
 
-@navbar-background:                             transparent;
+@navbar-background:                             @global-nav-background;
 @navbar-color:                                  @global-color;
-@navbar-link-color:                             @global-muted-color;
-@navbar-link-hover-color:                       @global-color;
+@navbar-link-color:                             @global-link-color;
+@navbar-link-hover-color:                       @global-link-hover-color;
 
-@navbar-nav-height:                             80px;
+@navbar-nav-height:                             100px;
 @navbar-nav-line-height:                        @navbar-nav-height;
-@navbar-nav-padding-horizontal:                 20px;
-@navbar-nav-color:                              @global-dark-color;
-@navbar-nav-font-size:                          13px;
-@navbar-nav-font-family:                        @global-alternate-font-family;
-@navbar-nav-hover-background:                   transparent;
-@navbar-nav-hover-color:                        fade(@navbar-nav-color, 50%);
-@navbar-nav-onclick-background:                 transparent;
-@navbar-nav-onclick-color:                      @global-dark-color;
-@navbar-nav-active-background:                  transparent;
-@navbar-nav-active-color:                       fade(@navbar-nav-color, 50%);
+@navbar-nav-padding-horizontal:                 0;
+@navbar-nav-color:                              @global-heading-color;
+@navbar-nav-font-size:                          @global-font-size;
+@navbar-nav-font-family:                        @global-alt-font-family;
+@navbar-nav-hover-background:                   rgba(0,0,0,0);
+@navbar-nav-hover-color:                        @global-link-color;
+@navbar-nav-onclick-background:                 rgba(0,0,0,0);
+@navbar-nav-onclick-color:                      @global-link-hover-color;
+@navbar-nav-active-background:                  rgba(0,0,0,0);
+@navbar-nav-active-color:                       @global-link-color;
 
-@navbar-brand-font-size:                        round((@global-font-size * 1.28)); // 18px / 20px
-@navbar-brand-color:                            @global-dark-color;
+@navbar-brand-font-size:                        round((@global-font-size * 1.333)); // 20px
+@navbar-brand-color:                            @global-color;
 @navbar-brand-hover-color:                      @global-color;
 
-@navbar-toggle-font-size:                       round((@global-font-size * 1.28)); // 18px / 20px
+@navbar-toggle-font-size:                       round((@global-font-size * 1.2)); // 18px
 @navbar-toggle-color:                           @global-color;
 @navbar-toggle-hover-color:                     @global-color;
-
-@navbar-toggle-icon:                            "";
 
 //
 // New
 //
 
-@navbar-brand-font-family:                        @global-alternate-font-family;
+@navbar-nav-text-transform:                     @global-text-transform;
+@navbar-nav-margin-horizontal:                  @global-grid-gutter;
+@navbar-attached-box-shadow:                    0 0 20px 0 rgba(51,51,51,0.1);
+@navbar-toggle-icon:                            "\e906";
+@navbar-toggle-icon-font-family:                "Chester";
+@navbar-dropdown-nav-divider-border:            @global-border;
+@navbar-dropdown-nav-divider-border-width:      @global-border-width;
+@navbar-dropdown-grid-divider-border-width:     @global-border-width;
+@navbar-nav-item-line-hover-height:             2px;
+
+
 
 
 // Component
 // ========================================================================
 
-.hook-navbar() {
-    margin-left: -@navbar-nav-padding-horizontal;
-    margin-right: -@navbar-nav-padding-horizontal;
-}
+.hook-navbar() {}
 
 
 // Sub-object: `uk-navbar-nav`
 // ========================================================================
 
 .hook-navbar-nav() {
-    text-transform: uppercase;
-    -webkit-transition: color 0.2s ease-in-out;
-    transition: color 0.2s ease-in-out;
+
+    text-transform: @navbar-nav-text-transform;
+
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 27px;
+        left: 0;
+        height: @navbar-nav-item-line-hover-height; //@global-border-width;
+        width: 0;
+        background: fade(@navbar-nav-hover-color, 70%);
+        -webkit-transition: width .4s;
+        transition: width .4s;
+    }
+
 }
 
 // Hover
-.hook-navbar-nav-hover() {}
+.hook-navbar-nav-hover() {
+
+    &:before { width: 100%; }
+
+}
 
 // OnClick
 .hook-navbar-nav-onclick() {}
 
 // Active
-.hook-navbar-nav-active() {}
+.hook-navbar-nav-active() {
+
+    &:before { width: 100%; }
+
+}
 
 
 // Sub-object: `uk-navbar-content`
@@ -81,27 +106,15 @@
 
 .hook-navbar-misc() {
 
-    /*
-     * `uk-navbar-brand`
-     */
+    .uk-navbar-nav > li:not(:last-child),
+    .uk-navbar-brand { margin-right: @navbar-nav-margin-horizontal; }
 
-    .uk-navbar-brand {
-        font-family: @navbar-brand-font-family;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+    .uk-navbar-attached {
+        background: @global-background;
+        box-shadow: @navbar-attached-box-shadow;
     }
 
-    /*
-     * `uk-navbar-toggle`
-     */
-
-    .uk-navbar-toggle:after {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background: url("@{global-image-path}/navbar-toggle.svg") 0 0 no-repeat;
-        line-height: 20px;
-    }
+    .uk-navbar-toggle { padding: 0 @global-grid-gutter; }
+    .uk-navbar-toggle:after { font-family: @navbar-toggle-icon-font-family; }
 
 }

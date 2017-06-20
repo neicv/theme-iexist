@@ -1,3 +1,5 @@
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
 //
 // Component: Dropdown
 //
@@ -8,23 +10,25 @@
 // ========================================================================
 
 @dropdown-z-index:                              @global-z-index + 20;
-@dropdown-margin-top:                           10px;
-@dropdown-padding:                              25px;
-@dropdown-background:                           #fff;
+@dropdown-padding:                              @global-margin-large;
+@dropdown-background:                           @global-background;
 @dropdown-color:                                @global-color;
-@dropdown-divider-border:                       @global-border;
+@dropdown-divider-border:                       fade(@global-border, 30%);
 
-@dropdown-small-padding:                        @dropdown-padding;
+@dropdown-navbar-color:                         @global-color;
 
-@dropdown-navbar-margin:                        0;
-@dropdown-navbar-background:                    #181818;
-@dropdown-navbar-color:                         @global-contrast-color;
+@dropdown-navbar-background:                    @global-background;
 
+//
+// New
+//
+
+@dropdown-box-shadow:                           0 0 20px 0 rgba(51,51,51,0.1);
 
 // Component
 // ========================================================================
 
-.hook-dropdown() {}
+.hook-dropdown() { box-shadow: @dropdown-box-shadow; }
 
 
 // Modifier: `uk-dropdown-navbar`
@@ -42,18 +46,4 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-dropdown-misc() {
-
-    .uk-dropdown > .uk-nav { margin: (15px - @dropdown-padding) (-@dropdown-padding); }
-
-    .uk-dropdown-small > .uk-nav { margin: (15px - @dropdown-small-padding) (-@dropdown-small-padding); }
-
-
-    // Only tablets and desktops
-    @media (min-width: @breakpoint-medium) {
-
-        .uk-dropdown-navbar:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-']:nth-child(n+2) { border-left-color: rgba(255, 255, 255, 0.06); }
-
-    }
-
-}
+.hook-dropdown-misc() {}

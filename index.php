@@ -109,7 +109,7 @@ return [
         /**
          * Custom markup calculations based on theme settings
          */
-        'view.init' => function ($event, $view) use ($app) {
+        'view.layout' => function ($event, $view) use ($app) {
 
             if ($app->isAdmin()) {
                 return;
@@ -117,23 +117,48 @@ return [
 
             $params = $view->params;
 
-            if ($params['image'] || $params['image_alt']) {
+            $classes = [
+                'navbar' => 'tm-navbar',
+                'hero' => '',
+                'parallax' => ''
+            ];
 
-                if ($params['image_alt']) {
+            $sticky = [
+                'media' => 767,
+                'showup' => true,
+                'animation' => 'uk-animation-slide-top'
+            ];
 
-                    $params['image'] = $params['image_alt'];
-                    $params['contrast'] = $params['contrast_alt'];
+            // Sticky overlay navbar if hero position exists
+            if ($params['navbar_transparent'] && $view->position()->exists('hero') && $params['hero_image']) {
 
+                $sticky['top'] = '.uk-sticky-placeholder + *';
+                $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
+
+                $classes['hero'] = 'tm-hero-padding';
+
+                if ($params['hero_contrast']) {
+
+                    $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
+                    $classes['navbar'] .= ' tm-navbar-contrast';
+
+                } else {
+                    $sticky['clsinactive'] = 'tm-navbar-transparent';
                 }
 
-                if ($params['contrast'] && $params['logo_contrast']) {
-                    $params['logo'] = $params['logo_contrast'];
-                }
-
-            } else {
-                $params['contrast'] = false;
             }
 
+            if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
+                $classes['parallax'] = 'data-uk-parallax="{bg: \'-250\'}"';
+            }
+
+            if ($params['hero_contrast'] && $params['hero_image']) {
+                $classes['hero'] .= ' uk-contrast';
+            }
+
+            $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
+
+            $params['classes'] = $classes;
         },
 
         'view.system/site/widget-menu' => function ($event, $view) {

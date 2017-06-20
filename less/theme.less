@@ -5,6 +5,113 @@
 
 @global-font-path: "../less/uikit/fonts";
 
+
+
+// Name:            Container
+// Description:     Component to align and center your site and grid content
+//
+// Component:       `uk-container`
+//
+// Modifier:        `uk-container-small`
+//                  `uk-container-large`
+//                  `uk-container-expand`
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@container-max-width:                   1200px;
+@container-small-max-width:             900px;
+@container-large-max-width:             1600px;
+
+@container-padding-horizontal:          15px;
+@container-padding-horizontal-s:        @global-gutter;
+@container-padding-horizontal-m:        @global-medium-gutter;
+
+
+/* ========================================================================
+   Component: Container
+ ========================================================================== */
+
+/*
+ * 1. Box sizing has to be `content-box` so the max-width is always the same and
+ *    unaffected by the padding on different breakpoints. It's important for the size modifiers.
+ */
+
+.uk-container {
+    box-sizing: content-box; /* 1 */
+    max-width: @container-max-width;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: @container-padding-horizontal;
+    padding-right: @container-padding-horizontal;
+}
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-small) {
+
+    .uk-container {
+        padding-left: @container-padding-horizontal-s;
+        padding-right: @container-padding-horizontal-s;
+    }
+
+}
+
+/* Tablet landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .uk-container {
+        padding-left: @container-padding-horizontal-m;
+        padding-right: @container-padding-horizontal-m;
+    }
+
+}
+
+/*
+ * Micro clearfix
+ */
+
+.uk-container::before,
+.uk-container::after {
+    content: "";
+    display: table;
+}
+
+.uk-container::after { clear: both; }
+
+/*
+ * Remove margin from the last-child
+ */
+
+.uk-container > :last-child { margin-bottom: 0; }
+
+/*
+ * Remove padding from nested containers
+ */
+
+.uk-container .uk-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* Size modifier
+ ========================================================================== */
+
+.uk-container-small { max-width: @container-small-max-width; }
+
+.uk-container-large { max-width: @container-large-max-width; }
+
+.uk-container-expand { max-width: none; }
+
+
+
+
+
+
+
 /* ========================================================================
    Theme
  ========================================================================== */
@@ -64,14 +171,48 @@ html { overflow-y: scroll; }
     }
 
 }
+/* Dropdown stack
+ ========================================================================== */
 
+/*
+ * Reset width if column width is set
+ */
+
+.uk-dropdown-navbar.uk-dropdown-stack {
+    min-width: 0 !important;
+    max-width: none !important;
+}
 
 /* Navbar
  ========================================================================== */
 
+.tm-navbar {
+    position: relative;
+    background: @navbar-background;
+    z-index: 1;
+}
+
+/* Navbar as overlay */
+.tm-navbar-overlay:not(.uk-active) {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Transparent background */
+.tm-navbar-transparent {
+    border-bottom-color: transparent;
+    background: transparent;
+    box-shadow: none;
+}
+
+.tm-navbar-transparent .uk-navbar { background: none; }
+
 /*
  * Contrast color
  */
+
+.tm-logo-contrast { display: none; }
 
 .tm-navbar-contrast {
 
@@ -106,8 +247,12 @@ html { overflow-y: scroll; }
 
     .uk-navbar-toggle:after { background: url("../less/uikit/images/navbar-toggle-contrast.svg") 0 0 no-repeat; }
 
-}
+    // Logo
+    .tm-logo { display: none; }
+    .tm-logo-contrast { display: inline-block; }
 
+}
+ 
 
 /* Blocks
  ========================================================================== */
@@ -224,6 +369,9 @@ html { overflow-y: scroll; }
 @theme-navbar-gutter:                           @global-grid-gutter; // 25px
 @theme-navbar-gutter-large:                     @global-grid-gutter-large; // 40px
 @theme-navbar-gutter-small:                     @global-grid-gutter-small; // 15px
+@navbar-nav-item-height:                        80px;
+@navbar-nav-item-padding-horizontal:            15px;
+@navbar-color-mode:                             none;
 
 @theme-navbar-container-height:                 @navbar-nav-height; // 100px (navbar.less)
 @theme-navbar-container-sticky-height:          (@theme-navbar-container-height + (@global-grid-gutter-large * 2)); // 100 + 2*40 = 180px
@@ -248,6 +396,12 @@ html { overflow-y: scroll; }
 @theme-navbar-dropdown-width:                   200px;
 @theme-navbar-icon-search:                      "\e036";
 @theme-navbar-icon-more:                        "\e900";
+
+@navbar-dropdown-grid-gutter-horizontal:        @global-gutter;
+@navbar-dropdown-grid-gutter-vertical:          @navbar-dropdown-grid-gutter-horizontal;
+
+@navbar-dropdown-dropbar-margin-bottom:         30px;
+@navbar-dropdown-nav-divider-border:            @global-border;
 
 
 //
@@ -304,7 +458,7 @@ html { overflow-y: scroll; }
     .uk-navbar-toggle { height: @theme-navbar-nav-centered-height; }
 
     // Dropdown
-    .uk-dropdown-navbar { margin-top: @theme-navbar-centered-dropdown-navbar-margin; }
+   // .uk-dropdown-navbar { margin-top: @theme-navbar-centered-dropdown-navbar-margin;}
 
 
 }
@@ -314,7 +468,7 @@ html { overflow-y: scroll; }
 //
 
 @dropdown-background:                           @global-background;
-@dropdown-navbar-background:                    @global-background;
+@dropdown-navbar-background:                    @global-nav-background;//@global-muted-background:;
 @dropdown-navbar-divider-border:                @global-border;
 @dropdown-shadow:                               0 9px 20px rgba(0,0,0,0.06), 0 2px 3px rgba(0,0,0,0.04);
 @dropdown-navbar-shadow:                        @dropdown-shadow;
@@ -517,3 +671,172 @@ html { overflow-y: scroll; }
 
 @theme-navbar-icon-color:                        fade(@contrast-color, 70%); //@global-highlight-color;
 @theme-navbar-icon-click-color:                 @global-primary-color; 
+
+
+
+
+
+/* ========================================================================
+   Component: Navbar
+ ========================================================================== */
+
+/*
+ * 1. Create position context to center navbar group
+ */
+
+.uk-navbar {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* 1 */
+    position: relative;
+    .hook-navbar;
+}
+
+
+/* Container
+ ========================================================================== */
+
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background: @navbar-background;
+    .hook-navbar-container;
+}
+
+// Color Mode
+.uk-navbar-container:not(.uk-navbar-transparent):extend(.uk-light all) when (@navbar-color-mode = light) {}
+.uk-navbar-container:not(.uk-navbar-transparent):extend(.uk-dark all) when (@navbar-color-mode = dark) {}
+
+
+/*
+ * Remove pseudo elements created by micro clearfix as precaution (if Container component is used)
+ */
+
+.uk-navbar-container > ::before,
+.uk-navbar-container > ::after { display: none !important; }
+
+
+/* Groups
+ ========================================================================== */
+
+/*
+ * 1. Align navs and items vertically if they have a different height
+ * 2. Note: IE 11 requires an extra `div` which affects the center selector
+ */
+
+.uk-navbar-left,
+.uk-navbar-right,
+// 2. [class*='uk-navbar-center'],
+.uk-navbar-center,
+.uk-navbar-center-left > *,
+.uk-navbar-center-right > *, {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* 1 */
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/*
+ * Horizontal alignment
+ * 1. Create position context for centered navbar with sub groups (left/right)
+ * 2. Needed for dropdowns because a new position context is created
+ *    `z-index` must be smaller than off-canvas
+ * 3. Fix text wrapping if the centered section is larger than 50% of the navbar
+ * 4. Align sub groups for centered navbar
+ */
+
+.uk-navbar-right { margin-left: auto; }
+
+.uk-navbar-center:only-child {
+    margin-left: auto;
+    margin-right: auto;
+    /* 1 */
+    position: relative;
+}
+
+.uk-navbar-center:not(:only-child) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+    /* 2 */
+    z-index: @global-z-index - 10;
+}
+
+/* 3 */
+.uk-navbar-center:not(:only-child) .uk-navbar-nav > li > a,
+.uk-navbar-center:not(:only-child) .uk-navbar-item,
+.uk-navbar-center:not(:only-child) .uk-navbar-toggle { white-space: nowrap; }
+
+/* 4 */
+.uk-navbar-center-left,
+.uk-navbar-center-right {
+   position: absolute;
+   top: 0;
+}
+
+.uk-navbar-center-left { right: 100%; }
+.uk-navbar-center-right { left: 100%; }
+
+[class*='uk-navbar-center-'] .uk-navbar-nav > li > a,
+[class*='uk-navbar-center-'] .uk-navbar-item,
+[class*='uk-navbar-center-'] .uk-navbar-toggle { white-space: nowrap; }
+
+  
+
+
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-navbar-misc() {
+
+    /*
+     * Navbar
+     */
+
+    .uk-navbar-container > .uk-container .uk-navbar-left {
+        margin-left: -@navbar-nav-item-padding-horizontal;
+        margin-right: -@navbar-nav-item-padding-horizontal;
+    }
+    .uk-navbar-container > .uk-container .uk-navbar-right { margin-right: -@navbar-nav-item-padding-horizontal; }
+	    /*
+     * Grid Divider
+     */
+
+    .uk-navbar-dropdown-grid > * { position: relative; }
+/*
+    .uk-navbar-dropdown-grid > :not(.uk-first-column)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: (@navbar-dropdown-grid-gutter-horizontal / 2);
+        border-left: @navbar-dropdown-grid-divider-border-width solid @navbar-dropdown-grid-divider-border;
+    }
+
+    /* Vertical */
+  /*  .uk-navbar-dropdown-grid.uk-grid-stack > .uk-grid-margin::before {
+        content: "";
+        position: absolute;
+        top: -(@navbar-dropdown-grid-gutter-vertical / 2);
+        left: @navbar-dropdown-grid-gutter-horizontal;
+        right: 0;
+        border-top: @navbar-dropdown-grid-divider-border-width solid @navbar-dropdown-grid-divider-border;
+    }
+*/
+}
+
+// Hooks
+// ========================================================================
+
+.hook-container-misc;
+.hook-container-misc() {}
+.hook-navbar() {}
+.hook-navbar-misc;
+.hook-navbar-container() {}
+.hook-navbar-nav-item() {} 

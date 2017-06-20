@@ -17,11 +17,21 @@
 @block-secondary-background:                    #1f1915;
 
 
+//
+// New
+//
+
+@block-padding-horizontal:                      30px;
+@block-xlarge-padding-horizontal:               100px;
+
+
 // Component
 // ========================================================================
 
-.hook-block() {}
-
+.hook-block() {
+    padding-left: @block-padding-horizontal;
+    padding-right: @block-padding-horizontal;
+}
 
 // Color modifier
 // ========================================================================

@@ -15,11 +15,12 @@
 // Text
 //
 
-@global-color:                                  #6f6f6f;
+@global-color:                                  #5f5f63;//#6f6f6f;
 @global-default-color:                          #2a2a2a;
 @global-muted-color:                            #A5A5A5;
 @global-highlight-color:                        #222;
 @global-disabled-color:                         #c6c6c6;
+@global-heading-color:                          #444;
 
 @global-link-color:                             #536a90;
 @global-link-hover-color:                       #222;
@@ -38,23 +39,62 @@
 @global-line-height:                            26px;
 
 //
+// Box-Shadows
+//
+
+@global-small-box-shadow:                       0 2px 8px rgba(0,0,0,0.08);
+@global-medium-box-shadow:                      0 5px 15px rgba(0,0,0,0.08);
+@global-large-box-shadow:                       0 14px 25px rgba(0,0,0,0.16);
+@global-xlarge-box-shadow:                      0 28px 50px rgba(0,0,0,0.16);
+
+//
 // Typography
 //
 
+//@global-font-family:                            Nunito Sans;
+@global-body-font-family:                       'Lato';
+@global-alt-font-family:                        'Lora';
 @global-font-weight:                            normal;
 @global-letter-spacing:                         2px;
 @global-text-transform:                         uppercase;
+
+@global-font-size:                              17px;
+@global-line-height:                            1.58;      // 27px
+
+@global-xxlarge-font-size:                      46px;
+@global-xlarge-font-size:                       38px;
+@global-large-font-size:                        32px;
+@global-medium-font-size:                       26px;
+@global-small-font-size:                        14px;
+
+@global-primary-font-family:                    inherit;
+@global-primary-font-weight:                    300;
+@global-primary-text-transform:                 inherit;
+@global-primary-letter-spacing:                 inherit;
+@global-primary-font-style:                     inherit;
+
+@global-secondary-font-family:                  inherit;
+@global-secondary-font-weight:                  300;
+@global-secondary-text-transform:               inherit;
+@global-secondary-letter-spacing:               inherit;
+@global-secondary-font-style:                   inherit;
+
+
+
 
 //
 // Backgrounds & Borders
 //
 
 @global-background:                             rgba(255, 255, 255, 0.90);//#fff;
+@global-nav-background:                         #fff;
 @global-light-background:                       #f9f9f9;
 @global-border:                                 #EEEEEE;
+@global-border-width:                           1px;
 @global-border-radius:                          8; // 0 !!!!!!!!!!!!!!!
 @global-secondary-background:                   #fff;
 @global-inverted-background:                    darken(@global-secondary-background, 6%);
+@global-muted-background:                       #fafafa;
 
 @global-default-background:                     #f5f5f5;
 @global-default-hover-background:               #fafafa;
@@ -78,8 +118,13 @@
 // Spacings
 //
 
+// Used in margin, section, list
 @global-margin:                                 25px;
+@global-small-margin:                           10px;
+@global-medium-margin:                          40px;
 @global-margin-large:                           35px;
+@global-xlarge-margin:                          130px;
+
 @global-grid-gutter:                            25px;
 @global-grid-gutter-large:                      40px;
 
@@ -98,6 +143,11 @@
 
 @global-z-index:                                1000;
 
+// Used in grid, column, container, align, card, padding
+@global-gutter:                                 30px;
+@global-small-gutter:                           15px;
+@global-medium-gutter:                          40px;
+@global-large-gutter:                           70px; 
 
 // Internal
 // ==========================================================================
