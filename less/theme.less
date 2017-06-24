@@ -30,7 +30,127 @@
 @container-padding-horizontal-s:        @global-gutter;
 @container-padding-horizontal-m:        @global-medium-gutter;
 
+// Headerbar
+@theme-headerbar-padding-horizontal:                30px;
+@theme-headerbar-padding-large-horizontal:          80px;
 
+//
+// Footer
+//
+
+@theme-footer-fixed-height:                     450px;
+@theme-footer-height:                           60px;
+@theme-footer-padding-vertical:                 45px;
+@theme-footer-padding-large-vertical:           95px;
+
+@theme-footer-totop-size:                       40px;
+@theme-footer-totop-color:                      fade(@global-secondary-color, 60%);
+@theme-footer-totop-hover-color:                @global-secondary-highlight-color;
+@theme-footer-totop-active-color:               @global-primary-color;
+
+//
+// Icon
+//
+
+@icon-hover-color:                              @global-highlight-color;
+
+
+
+
+@global-grid-gutter:                            25px;
+@global-grid-gutter-large:                      40px;
+@global-grid-gutter-small:                      15px;
+@global-primary-color:                          @global-link-color;
+@global-primary-link-color:                     #675642;
+
+@global-theme-icon-font-family:                 'theme-icons'; 
+@global-transition:                             all 0.12s ease-in-out;
+
+// Theme variables
+// ========================================================================
+
+//
+// uk-container (content wrapper) widths
+//
+
+@utility-container-max-width:                   980px;
+@utility-container-large-max-width:             1200px;
+
+//
+// Body & Block Backgrounds
+//
+
+@theme-body-background:                         @global-secondary-background;
+
+//
+// Header Offset for Fullscreen
+//
+
+// Offset for default navbar ((100px * 2) + (40px * 2)) = ((height * 2) + (border * 2))
+@theme-header-offset:                           round((@theme-navbar-container-height * 2) + (@global-grid-gutter-large * 2));
+
+// Offset for centered navbar ((130px * 2) + (40px * 2) + (15px * 2)) = ((height * 2) + (border * 2) + (padding * 2))
+@theme-header-centered-offset:                  round((@theme-navbar-centered-container-height * 2) + (@global-grid-gutter-large * 2) + (@global-grid-gutter-small * 2));
+
+// Offset for small navbar ((80px * 2) + (15px * 2)) = ((height * 2) + (border * 2))
+@theme-header-offset-small:                     round((@theme-navbar-container-height-small * 2) + (@global-grid-gutter-small * 2));
+
+//
+// Navbar
+//
+
+@theme-navbar-gutter:                           @global-grid-gutter; // 25px
+@theme-navbar-gutter-large:                     @global-grid-gutter-large; // 40px
+@theme-navbar-gutter-small:                     @global-grid-gutter-small; // 15px
+@navbar-nav-item-height:                        80px;
+@navbar-nav-item-padding-horizontal:            15px;
+@navbar-color-mode:                             none;
+
+@theme-navbar-container-height:                 @navbar-nav-height; // 100px (navbar.less)
+@theme-navbar-container-sticky-height:          (@theme-navbar-container-height + (@global-grid-gutter-large * 2)); // 100 + 2*40 = 180px
+@theme-navbar-container-height-small:           80px; // navbar height for small view ports
+@theme-navbar-container-sticky-height-small:    (@theme-navbar-container-height-small + (@global-grid-gutter-small * 2)); // 80 + 2*15 = 110px
+
+@theme-navbar-centered-container-height:        130px; // height value for "tm-navbar-centered" modifier when layouts/header.centered.php is active
+@theme-navbar-centered-container-sticky-height: (@theme-navbar-centered-container-height + (@global-grid-gutter-large * 2)); // 130 + 2*40 = 210px
+
+@theme-navbar-nav-centered-height:              50px; // reducing the item heights when navbar is centered
+
+@theme-navbar-centered-dropdown-navbar-margin:  0;
+
+@theme-navbar-icon:                             "\e900";
+@theme-navbar-icon-size:                        24px;
+@theme-navbar-icon-color:                       @global-contrast-color;
+@theme-navbar-icon-hover-color:                 fade(@theme-navbar-icon-color, 70%);
+@theme-navbar-icon-click-color:                 @global-primary-color;
+@theme-navbar-button-width:                     35px;
+@theme-navbar-button-height:                    35px;
+@theme-navbar-dropdown-background:              @navbar-background; // (navbar.less)
+@theme-navbar-dropdown-width:                   200px;
+@theme-navbar-icon-search:                      "\e036";
+@theme-navbar-icon-more:                        "\e900";
+
+@navbar-dropdown-grid-gutter-horizontal:        @global-gutter;
+@navbar-dropdown-grid-gutter-vertical:          @navbar-dropdown-grid-gutter-horizontal;
+
+@navbar-dropdown-dropbar-margin-bottom:         30px;
+@navbar-dropdown-nav-divider-border:            @global-border;
+
+@theme-navbar-more-color:                                       @global-muted-color;
+@theme-navbar-more-hover-background:                            @button-background;
+@theme-navbar-more-hover-color:                                 @global-muted-color;
+@theme-navbar-more-active-background:                           @button-hover-background;
+@theme-navbar-more-active-color:                                @global-color;
+
+
+//
+// Avanti Grid
+//
+
+@theme-badge-muted-background:                  @global-light-background;
+@theme-badge-muted-color:                       @global-highlight-color;
+@theme-grid-divider-border:                     @grid-divider-border;
+ 
 /* ========================================================================
    Component: Container
  ========================================================================== */
@@ -159,7 +279,7 @@ html { overflow-y: scroll; }
 
 .tm-header { margin-bottom: 35px; }
 
-.tm-logo { margin-bottom: 10px; }
+.tm-logo { margin-bottom: 0px; }
 
 /* Phone landscape and smaller */
 @media (max-width: @breakpoint-small-max) {
@@ -186,11 +306,11 @@ html { overflow-y: scroll; }
 /* Navbar
  ========================================================================== */
 
-.tm-navbar {
+ .tm-navbar {
     position: relative;
     background: @navbar-background;
     z-index: 1;
-}
+} 
 
 /* Navbar as overlay */
 .tm-navbar-overlay:not(.uk-active) {
@@ -315,124 +435,21 @@ html { overflow-y: scroll; }
 
 }
 
-//
-// Icon
-//
-
-@icon-hover-color:                              @global-highlight-color;
 
 
-
-
-@global-grid-gutter:                            25px;
-@global-grid-gutter-large:                      40px;
-@global-grid-gutter-small:                      15px;
-@global-primary-color:                          @global-link-color;
-@global-primary-link-color:                     #675642;
-
-@global-theme-icon-font-family:                 'theme-icons'; 
-@global-transition:                             all 0.12s ease-in-out;
-
-// Theme variables
-// ========================================================================
-
-//
-// uk-container (content wrapper) widths
-//
-
-@utility-container-max-width:                   980px;
-@utility-container-large-max-width:             1200px;
-
-//
-// Body & Block Backgrounds
-//
-
-@theme-body-background:                         @global-secondary-background;
-
-//
-// Header Offset for Fullscreen
-//
-
-// Offset for default navbar ((100px * 2) + (40px * 2)) = ((height * 2) + (border * 2))
-@theme-header-offset:                           round((@theme-navbar-container-height * 2) + (@global-grid-gutter-large * 2));
-
-// Offset for centered navbar ((130px * 2) + (40px * 2) + (15px * 2)) = ((height * 2) + (border * 2) + (padding * 2))
-@theme-header-centered-offset:                  round((@theme-navbar-centered-container-height * 2) + (@global-grid-gutter-large * 2) + (@global-grid-gutter-small * 2));
-
-// Offset for small navbar ((80px * 2) + (15px * 2)) = ((height * 2) + (border * 2))
-@theme-header-offset-small:                     round((@theme-navbar-container-height-small * 2) + (@global-grid-gutter-small * 2));
 
 //
 // Navbar
 //
 
-@theme-navbar-gutter:                           @global-grid-gutter; // 25px
-@theme-navbar-gutter-large:                     @global-grid-gutter-large; // 40px
-@theme-navbar-gutter-small:                     @global-grid-gutter-small; // 15px
-@navbar-nav-item-height:                        80px;
-@navbar-nav-item-padding-horizontal:            15px;
-@navbar-color-mode:                             none;
-
-@theme-navbar-container-height:                 @navbar-nav-height; // 100px (navbar.less)
-@theme-navbar-container-sticky-height:          (@theme-navbar-container-height + (@global-grid-gutter-large * 2)); // 100 + 2*40 = 180px
-@theme-navbar-container-height-small:           80px; // navbar height for small view ports
-@theme-navbar-container-sticky-height-small:    (@theme-navbar-container-height-small + (@global-grid-gutter-small * 2)); // 80 + 2*15 = 110px
-
-@theme-navbar-centered-container-height:        130px; // height value for "tm-navbar-centered" modifier when layouts/header.centered.php is active
-@theme-navbar-centered-container-sticky-height: (@theme-navbar-centered-container-height + (@global-grid-gutter-large * 2)); // 130 + 2*40 = 210px
-
-@theme-navbar-nav-centered-height:              50px; // reducing the item heights when navbar is centered
-
-@theme-navbar-centered-dropdown-navbar-margin:  0;
-
-@theme-navbar-icon:                             "\e900";
-@theme-navbar-icon-size:                        24px;
-@theme-navbar-icon-color:                       @global-contrast-color;
-@theme-navbar-icon-hover-color:                 fade(@theme-navbar-icon-color, 70%);
-@theme-navbar-icon-click-color:                 @global-primary-color;
-@theme-navbar-button-width:                     35px;
-@theme-navbar-button-height:                    35px;
-@theme-navbar-dropdown-background:              @navbar-background; // (navbar.less)
-@theme-navbar-dropdown-width:                   200px;
-@theme-navbar-icon-search:                      "\e036";
-@theme-navbar-icon-more:                        "\e900";
-
-@navbar-dropdown-grid-gutter-horizontal:        @global-gutter;
-@navbar-dropdown-grid-gutter-vertical:          @navbar-dropdown-grid-gutter-horizontal;
-
-@navbar-dropdown-dropbar-margin-bottom:         30px;
-@navbar-dropdown-nav-divider-border:            @global-border;
-
-
-//
-// Avanti Grid
-//
-
-@theme-badge-muted-background:                  @global-light-background;
-@theme-badge-muted-color:                       @global-highlight-color;
-@theme-grid-divider-border:                     @grid-divider-border;
-
-
-//
-//
-//
-
-.tm-navbar .tm-navbar-container {
-    box-sizing: border-box;
-    position: relative;
-    min-height: @theme-navbar-container-height;
-}
-
+/*
 .tm-navbar-left,
 .tm-navbar-right {
     position: absolute;
     top: 0;
     bottom: 0;
 }
-
-.tm-navbar-left{ left: @utility-container-padding-horizontal; }
-.tm-navbar-right { right: @utility-container-padding-horizontal; }
-
+*/
 // Logo
 // Putting the logo above the navbar
 .tm-navbar-single .tm-navbar-left { z-index: (@global-z-index + 11); }
@@ -463,6 +480,53 @@ html { overflow-y: scroll; }
 
 }
 
+
+
+//
+// Navbar
+//
+
+/* .tm-navbar { display: inline-block; }
+.tm-navbar .uk-dropdown { text-align: left; }
+
+.tm-navbar-left {
+  position: absolute;
+  top: 0;
+  left: @theme-headerbar-padding-horizontal;
+  bottom: 0;
+}
+
+.tm-navbar-left .uk-navbar-toggle { padding-left: 0; }
+
+.tm-navbar-right {
+  position: absolute;
+  top: 0;
+  right: @theme-headerbar-padding-horizontal;
+  bottom: 0;
+} */
+
+/* @media (min-width: @breakpoint-xlarge) {
+
+    .tm-navbar-left { left: @theme-headerbar-padding-large-horizontal }
+    .tm-navbar-right { right: @theme-headerbar-padding-large-horizontal }
+
+}
+
+@media (min-width: @breakpoint-large) {
+
+    .uk-sticky-placeholder .tm-navbar-default.tm-navbar-container:not(.uk-active) .tm-navbar-left { display: none; }
+    .uk-sticky-placeholder .tm-navbar-default.tm-navbar-container:not(.uk-active) .tm-navbar-right { display: none; }
+
+}
+
+.tm-navbar-container {
+    padding-top: @global-margin;
+    padding-bottom: @global-margin;
+}
+ */
+
+
+
 //
 // Dropdown
 //
@@ -477,27 +541,6 @@ html { overflow-y: scroll; }
 
 
 
-
-// Navbar gutter for large view ports
-@media (min-width: @breakpoint-large) {
-
-    // Navbar wrapper
-    .tm-navbar-sticky .tm-navbar-wrapper,
-    .tm-navbar-sticky .tm-navbar-wrapper-animate { border-width: @theme-navbar-gutter-large; }
-
-}
-
-// Navbar gutter for small view ports
-@media (max-width: @breakpoint-small-max) {
-
-    // Navbar wrapper
-    .tm-navbar-sticky .tm-navbar-wrapper,
-    .tm-navbar-sticky .tm-navbar-wrapper-animate { border-width: @theme-navbar-gutter-small; }
-
-    .tm-navbar .tm-navbar-container { min-height: @theme-navbar-container-height-small; }
-    .tm-navbar-centered .tm-navbar-container { min-height: 100%; }
-
-}
 
 // Header Social
 .tm-navbar .tm-navbar-social {
@@ -522,7 +565,6 @@ html { overflow-y: scroll; }
             color: @theme-navbar-icon-color;
             -webkit-transition: @global-transition;
             transition: @global-transition;
-			
         }
 
         // Hover
@@ -586,6 +628,7 @@ html { overflow-y: scroll; }
     // Dropdown style
     .tm-navbar-dropdown {
         width: @theme-navbar-dropdown-width;
+        margin-left: 0;
         background-color: @theme-navbar-dropdown-background;
     }
 
@@ -595,8 +638,52 @@ html { overflow-y: scroll; }
 .tm-navbar .tm-search .uk-search::before { display: none; }
 
 // Search field width
-.tm-navbar .tm-search .tm-search-dropdown .uk-search-field,
-.tm-navbar .tm-search .tm-search-dropdown .uk-search-field:focus { width: @theme-navbar-dropdown-width; }
+//.tm-navbar .tm-search .tm-search-dropdown .uk-search-field,
+//.tm-navbar .tm-search .tm-search-dropdown .uk-search-field:focus { width: @theme-navbar-dropdown-width; }
+
+
+
+//
+// Navbar More position
+//
+
+.tm-navbar-more {
+    position: relative;
+    padding: 0;
+}
+
+.tm-navbar-more > a {
+
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-left: -10px;
+    border-radius: 50%;
+    //font-family: "Avion";
+    font-size: 18px;
+    line-height: 32px;
+    color: @theme-navbar-more-color;
+    text-align: center;
+    -webkit-transition: background 0.1s ease-in-out;
+    transition: background 0.1s ease-in-out;
+
+    &:before { content: "\e606"; }
+
+    &:hover {
+        background: @theme-navbar-more-hover-background;
+        color: @theme-navbar-more-hover-color;
+    }
+
+    &:active {
+        background: @theme-navbar-more-active-background;
+        color: @theme-navbar-more-active-color;
+    }
+
+}
+
+
+
+
 
 // Style modifications
 // ==========================================================================
@@ -634,11 +721,22 @@ html { overflow-y: scroll; }
     padding-right: @grid-gutter-horizontal;
 } 
 
+
+.tm-block-fullwidth.uk-block { max-width: 100%; }
+
+[class*='tm-block-gutter'] { margin: @global-margin; }
+
+[class*='tm-block-gutter'].tm-block-fullwidth {
+    margin-left: @global-margin;
+    margin-right: @global-margin;
+}
+
+
 //
 // Search
 //
 
-/* @dropdown-search-background:                    @dropdown-navbar-background;
+@dropdown-search-background:                    @dropdown-navbar-background;
 @dropdown-search-color:                         @navbar-nav-color;
 
 @nav-search-color:                              @global-color;
@@ -653,8 +751,8 @@ html { overflow-y: scroll; }
 
 @search-dropdown-shadow:                        @dropdown-navbar-shadow;
 
-@offcanvas-search-shadow:                       @nav-offcanvas-shadow;
- */
+//@offcanvas-search-shadow:                       @nav-offcanvas-shadow;
+
 //
 // Utitlity
 //
@@ -669,7 +767,7 @@ html { overflow-y: scroll; }
 // Navbar
 //
 
-@theme-navbar-icon-color:                        fade(@contrast-color, 70%); //@global-highlight-color;
+@theme-navbar-icon-color:                       @global-highlight-color;// fade(@contrast-color, 70%); 
 @theme-navbar-icon-click-color:                 @global-primary-color; 
 
 
@@ -785,10 +883,153 @@ html { overflow-y: scroll; }
 [class*='uk-navbar-center-'] .uk-navbar-item,
 [class*='uk-navbar-center-'] .uk-navbar-toggle { white-space: nowrap; }
 
+
+//
+// Dropdown
+//
   
+.uk-dropdown { text-align: left; }
+
+//
+// Footer
+//
+
+.tm-block-footer {
+    box-sizing: border-box;
+    padding-top: @theme-footer-padding-vertical;
+    padding-bottom: @theme-footer-padding-vertical;
+}
+
+.tm-footer {
+    position: relative;
+    min-height: @theme-footer-height;
+}
+
+@media (min-width: @breakpoint-medium) {
+
+    .tm-footer-left,
+    .tm-footer-right {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+
+    .tm-footer-left{ left: 0; }
+    .tm-footer-right { right: 0; }
+
+}
+
+// Footer on small view ports
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-footer { display: block; }
+
+    .tm-footer > div:not(:first-child) { margin-top: @global-grid-gutter; }
+
+    .tm-footer > div {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .tm-footer > div > .uk-panel .uk-flex {
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
 
 
+}
 
+// Footer Brand
+.tm-footer .tm-brand {
+    font-size: round(@navbar-brand-font-size / 1.5);
+    color: @navbar-brand-color;
+    line-height: @global-line-height;
+    font-family: @navbar-brand-font-family;
+    font-weight: @global-font-weight;
+    text-transform: @navbar-brand-text-transform;
+    letter-spacing: @navbar-brand-letter-spacing;
+}
+
+// When tm-brand is a link
+.tm-footer a.tm-brand:hover {
+    color: @navbar-brand-hover-color;
+    text-decoration: none;
+}
+
+// Footer menu
+.tm-footer .uk-subnav { margin-bottom: 0; }
+
+// Footer Totop scroller (Warp Option)
+.tm-footer .tm-totop-scroller {
+
+    display: inline-block;
+    width: @theme-footer-totop-size;
+    height: @theme-footer-totop-size;
+    line-height: @theme-footer-totop-size;
+    text-align: center;
+    text-decoration: none;
+
+    // Icon
+    &::before {
+        content: "\e903";
+        color: @theme-footer-totop-color;
+        font-family: @global-theme-icon-font-family;
+        font-size: 24px;
+        -webkit-transition: @global-transition;
+        transition: @global-transition;
+    }
+
+    // Hover
+    &:hover::before { color: @theme-footer-totop-hover-color; }
+
+    // Click
+    &:focus::before,
+    &:active::before { color: @theme-footer-totop-active-color; }
+
+}
+
+// Footer layout centered
+.tm-footer-centered {
+
+    padding-top: @theme-footer-padding-large-vertical;
+    padding-bottom: @theme-footer-padding-large-vertical;
+
+    // Adding more space to child elements
+    .tm-footer > *:not(:first-child) { margin-top: @global-margin-small; }
+
+    // Default uk-navbar-brand font size
+    .tm-footer .tm-brand { font-size: @navbar-brand-font-size; }
+
+}
+
+// Footer fixed (Warp Option)
+.tm-footer-fixed {
+
+    // Setting the height as padding
+    padding-bottom: @theme-footer-fixed-height;
+
+    // Adding z-index to parent elements
+    .tm-header-container,
+    [class*='tm-top'],
+    .tm-main,
+    [class*='tm-bottom'] {
+        position: relative;
+        z-index: 1;
+    }
+
+    // Fixed position
+    .tm-block-footer {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: 0;
+        height: @theme-footer-fixed-height;
+    }
+
+} 
 
 // Miscellaneous
 // ========================================================================
@@ -809,8 +1050,8 @@ html { overflow-y: scroll; }
      */
 
     .uk-navbar-dropdown-grid > * { position: relative; }
-/*
-    .uk-navbar-dropdown-grid > :not(.uk-first-column)::before {
+
+    /* .uk-navbar-dropdown-grid > :not(.uk-first-column)::before {
         content: "";
         position: absolute;
         top: 0;
@@ -818,7 +1059,7 @@ html { overflow-y: scroll; }
         left: (@navbar-dropdown-grid-gutter-horizontal / 2);
         border-left: @navbar-dropdown-grid-divider-border-width solid @navbar-dropdown-grid-divider-border;
     }
-
+ */
     /* Vertical */
   /*  .uk-navbar-dropdown-grid.uk-grid-stack > .uk-grid-margin::before {
         content: "";
@@ -840,3 +1081,39 @@ html { overflow-y: scroll; }
 .hook-navbar-misc;
 .hook-navbar-container() {}
 .hook-navbar-nav-item() {} 
+
+// Style modifications
+// ==========================================================================
+
+.body-style ();
+
+// Colorful Style
+.body-style () when (@global-style = 'colorful') {
+
+    // Modifying the color of avanti slideshow overlay
+    .tm-header-container .tm-slideshow-avanti .uk-overlay-panel { color: @global-contrast-color; }
+
+    // Adding a texture
+    body,
+    .uk-block-primary,
+    .uk-block-secondary,
+    .uk-block-muted,
+    .uk-navbar,
+    .uk-dropdown,
+    .uk-panel-box-primary,
+    .uk-panel-box-secondary,
+    .uk-offcanvas-bar,
+    .tm-navbar-dropdown {
+        background-image: url('@{global-image-path}/block/texture_grain.png');
+        background-repeat: repeat;
+    }
+
+} 
+
+// Green
+.body-style () when (@global-style = 'green') {
+
+    .uk-panel-box-primary:extend(.uk-contrast all){};
+    .uk-panel-box-secondary:extend(.uk-contrast all){};
+
+}

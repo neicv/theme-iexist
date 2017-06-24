@@ -21,11 +21,12 @@
 @global-highlight-color:                        #222;
 @global-disabled-color:                         #c6c6c6;
 @global-heading-color:                          #444;
+@global-inverse-color:                          #fff;
 
 @global-link-color:                             #536a90;
 @global-link-hover-color:                       #222;
-@global-secondary-color:                        #4c368b;
-//@global-secondary-color:                        fade(@global-secondary-highlight-color, 50%);
+//@global-secondary-color:                        #4c368b;
+@global-secondary-color:                        fade(@global-secondary-highlight-color, 50%);
 @global-secondary-highlight-color:              #fff;
 @global-secondary-inverted-color:               #222;
 
@@ -92,7 +93,7 @@
 @global-border:                                 #EEEEEE;
 @global-border-width:                           1px;
 @global-border-radius:                          8; // 0 !!!!!!!!!!!!!!!
-@global-secondary-background:                   #fff;
+@global-secondary-background:                   #222;
 @global-inverted-background:                    darken(@global-secondary-background, 6%);
 @global-muted-background:                       #fafafa;
 
@@ -124,6 +125,7 @@
 @global-medium-margin:                          40px;
 @global-margin-large:                           35px;
 @global-xlarge-margin:                          130px;
+@global-margin-small:                           15px;
 
 @global-grid-gutter:                            25px;
 @global-grid-gutter-large:                      40px;
@@ -143,11 +145,23 @@
 
 @global-z-index:                                1000;
 
+//
+// Animations
+//
+
+@global-transition:                             all 0.12s ease-in-out;
+@global-transform:                              scale(0.8);
+@global-hover-transform:                        scale(0.9);
+@global-active-transform:                       scale(1);
+
+@global-ripple-animation:                       uk-ripple 0.5s ease-out forwards;
+
 // Used in grid, column, container, align, card, padding
 @global-gutter:                                 30px;
 @global-small-gutter:                           15px;
 @global-medium-gutter:                          40px;
 @global-large-gutter:                           70px; 
+@inverse-global-border:                         fade(@global-inverse-color, 8%); 
 
 // Internal
 // ==========================================================================

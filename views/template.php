@@ -5,96 +5,46 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= $view->render('head') ?>
-        <?php $view->style('theme', 'theme:css/theme.css') ?>
-        <?php $view->script('theme', 'theme:js/theme.js', ['uikit-animation', 'uikit-sticky',  'uikit-lightbox',  'uikit-parallax', 'uikit-slider', 'uikit-grid', 'uikit-accordion', 'uikit-tooltip', 'animtedtext']) ?>
+ 		<?php $view->style('theme', $params['style'] ? 'theme:css/theme.'.$params['style'].'.css' : 'theme:css/theme.css') ?>
+        <?php $view->script('animatedtext', 'theme:js/animated-text.js', ['uikit']) ?>
+        <?php $view->script('theme', 'theme:js/theme.js', ['uikit-sticky',  'uikit-lightbox',  'uikit-parallax', 'uikit-slider', 'uikit-grid', 'uikit-accordion', 'uikit-tooltip', 'animtedtext']) ?>
     </head>
-    <body>
-
-
-
+	
+    <body <?= $params['classes.body'] ?>>
 				
+        <?php if ($view->position()->exists('hero') || $params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
+        <div id="tm-header" class="tm-block-header">
 
-				<?php if ($params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
-				<div class="tm-container">
-				<!--<div class="tm-header tm-container">-->
+            <?php if ($params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
+                <?= $view->position('navbar', 'header-'.$params['header_layout'].'.php') ?>
+            <?php endif ?>
 
-					<!--<div class="uk-navbar-container" data-uk-sticky="{media: 768, animation: 'uk-animation-slide-top', clsactive: 'uk-active uk-navbar-attached'}">-->
-					<div class="<?= $params['classes.navbar'] ?>" <?= $params['classes.sticky'] ?>>
-		 
-						<!--<nav class="uk-navbar-wrapper < ?= ($params['contrast']) ? 'tm-navbar-contrast' : '' ?>">-->
-						
-							 <!--<div class="tm-navbar uk-navbar tm-navbar-single">-->
+            <?php if ($view->position()->exists('hero')) : ?>
+            <div id="tm-hero" class="tm-hero tm-header-container uk-block uk-block-large uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" <?= $params['hero_image'] ? "style=\"background-image: url('{$view->url($params['hero_image'])}');\"" : '' ?> <?= $params['classes.parallax'] ?>>
+                <div class="uk-container uk-container-center<?= $params['hero_width'] ? ' uk-width-1-1' : '' ?>">
 
-								<div class="uk-container">
+                    <section class="uk-grid uk-grid-match" data-uk-grid-margin>
+                        <?= $view->position('hero', 'position-grid.php') ?>
+                    </section>
 
-								<nav class="uk-navbar">
-								 
-									<?php if ($params['logo'] || $params['title']) : ?>
-									<div class="uk-navbar-left">
-										<a class="tm-logo uk-navbar-brand uk-flex uk-flex-middle" href="<?= $view->url()->get() ?>">
-											<?php if ($params['logo']) : ?>
-												<img class="tm-logo uk-responsive-height" src="<?= $this->escape($params['logo']) ?>" alt="">
-											<?php else : ?>
-												<?= $params['title'] ?>
-											<?php endif ?>
-										</a>
-									</div>
-									<?php endif ?>
+                </div>
+            </div>
+            <?php endif ?>
 
-									<?php if ($view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
-									<div class="uk-navbar-center">
-										<?= $view->menu('main', 'menu-navbar.php') ?>
-										<?= $view->position('navbar', 'position-blank.php') ?>
-									</div>
-									<?php endif ?>
+        </div>
+        <?php endif ?>
 
-									<?php if ($view->position()->exists('header-search')  || $view->position()->exists('header-social')  || $view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
-									<div class="uk-navbar-right ">
-
-										<?php if ($view->position()->exists('header_search')) : ?>
-										<div class="tm-search uk-hidden-small">
-										   <div data-uk-dropdown="{mode:'click', pos:'left-center'}">
-											   <button class="tm-navbar-button tm-search-button"></button>
-											   <div class="uk-dropdown-blank tm-navbar-dropdown">
-												   <?= $view->position('header_search', 'position-blank.php') ?>
-											   </div>
-										   </div>
-										</div>
-										<?php endif ?>
-										
-										<?php if ($view->position()->exists('header_social')) : ?>
-										<div class="tm-navbar-social uk-hidden-small">
-										   <div data-uk-dropdown="{mode:'click', pos:'left-center'}">
-											   <button class="tm-navbar-button tm-navbar-social-button"></button>
-											   <div class="uk-dropdown-blank tm-navbar-dropdown">
-												   <?= $view->position('header_social', 'position-blank.php') ?>
-											   </div>
-										   </div>
-										</div>
-										<?php endif ?>
-
-										<?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
-										<div class="uk-flex uk-flex-center uk-flex-middle uk-hidden-large">
-											<a href="#offcanvas" class="uk-navbar-toggle" data-uk-offcanvas></a>
-										</div>
-										<?php endif ?>
-
-									</div>
-									<?php endif ?>
-
-								</nav>
-								</div>
-
-							<!--</div>-->
-						<!--</nav>-->
-
-					</div>
-				</div>	
-				<?php endif ?>
-
-	<div class="uk-section-default" uk-scrollspy="{&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:false}">
-		<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large" <?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>>
-			<!--uk-background-cover  uk-section-default-->
+	<!--<div class="uk-section-default" uk-scrollspy="{&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:false}">-->
+		<div class="uk-section-default">
+			<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large" 
+			<?php if ($params['image_alt']) : ?>
+			<?= $params['image_alt'] ? "style=\"background-image: url('{$view->url($params['image_alt'])}');\"" : '' ?>
+			
+			<?php elseif ($params['image']) : ?>
+			<?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>
+			<?php endif ?>
+			>
+			
 			<div class="tm-background">
 	
 				<div class="uk-container uk-container-center">	
@@ -129,26 +79,29 @@
 					</section>
 					<?php endif; ?>
 					
-					</div>
-					</div>
-
 				</div>
 			</div>
-			</div>
+
+
 		
         </div>
 
-        <?php if ($view->position()->exists('footer')) : ?>
-        <div id="tm-footer" class="tm-footer uk-block uk-block-default">
+		<?php if ($view->position()->exists('bottom_d')) : ?>
+        <div id="tm-bottom-d" class="tm-bottom-d uk-block <?= $params['bottom_d_style'] ?>">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
-                <?= $view->position('footer', 'position-grid.php') ?>
+                    <?= $view->position('bottom_d', 'position-grid.php') ?>
                 </section>
 
             </div>
         </div>
-        <?php endif; ?>
+        <?php endif ?>
+
+
+        <?php if ($view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
+            <?= $view->position('footer_left', 'footer-'.$params['footer_layout'].'.php') ?>
+        <?php endif ?>
 
         <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
@@ -175,6 +128,6 @@
         <?php endif ?>
 
         <?= $view->render('footer') ?>
-
+	</div>
     </body>
 </html>

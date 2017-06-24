@@ -22,7 +22,8 @@ return [
     'menus' => [
 
         'main' => 'Main',
-        'offcanvas' => 'Offcanvas'
+        'offcanvas' => 'Offcanvas',
+		'footer' => 'Footer'
 
     ],
 
@@ -32,12 +33,17 @@ return [
     'positions' => [
 
         'navbar' => 'Navbar',
+		'navbar_more' => 'Navbar More',
 	    'header_search' => 'Header Search',
 	    'header_social' => 'Header Social',
+		'header_info' => 'Header Info',
+        'hero' => 'Hero',
         'top' => 'Top',
         'sidebar' => 'Sidebar',
         'bottom' => 'Bottom',
-        'footer' => 'Footer',
+		'bottom_d' => 'Bottom D',
+        'footer_left' => 'Footer Left',
+        'footer_right' => 'Footer Right',
         'offcanvas' => 'Offcanvas'
 
     ],
@@ -52,10 +58,20 @@ return [
         'alignment' => '',
         'html_class' => '',
         'sidebar_first' => false,
+        'hero_image' => '',
+        'hero_style' => 'uk-block-default',
+        'hero_blend' => '',
+        'hero_width' => false,
+        'hero_viewport' => '',
+        'hero_contrast' => '',
+        'hero_parallax' => '',
+        'top_style' => 'uk-block-muted',
+		'main_style' => 'uk-block-default',
+		'bottom_style' => 'uk-block-muted',
+		'bottom_d_style' => 'uk-block-primary uk-contrast',
         'image_alt' => '',
         'contrast_alt' => '',
-
-
+        'footer_style' => 'uk-block-secondary uk-contrast'
     ],
 
     /**
@@ -84,7 +100,13 @@ return [
         'logo_contrast' => '',
         'logo_offcanvas' => '',
         'image' => '',
-        'contrast' => ''
+        'contrast' => '',
+        'style' => '',
+        'header_layout' => 'default',
+        'header_sticky' => 'animated',
+        'footer_layout' => 'centered',
+        'footer_fixed' => true,
+        'totop_scroller' => true
 
     ],
 
@@ -123,29 +145,43 @@ return [
                 'parallax' => ''
             ];
 
-            $sticky = [
-                'media' => 767,
-                'showup' => true,
-                'animation' => 'uk-animation-slide-top'
-            ];
+            // Sticky from warp
+            $sticky = [];
+            if ($params['header_sticky'] == 'sticky') {
+                $sticky['media'] = 767;
+            }
 
-            // Sticky overlay navbar if hero position exists
-            if ($params['navbar_transparent'] && $view->position()->exists('hero') && $params['hero_image']) {
+            if ($params['header_sticky'] == 'animated') {
+                //$classes['header'] = 'tm-navbar-wrapper-animate';
+                $sticky['media'] = 767;
+                //$sticky['top'] = -250;
+                //$sticky['clsinactive'] = 'tm-navbar-wrapper';
+				$sticky['showup'] = 'true';
+                $sticky['animation'] = 'uk-animation-slide-top';
+            }
 
-                $sticky['top'] = '.uk-sticky-placeholder + *';
-                $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
+            if (count($sticky)) {
+                $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
+            }
 
-                $classes['hero'] = 'tm-hero-padding';
+            if ($params['hero_viewport']) {
+                $classes['hero'] = 'tm-hero-height';
+            }
 
-                if ($params['hero_contrast']) {
+            if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
+                $classes['parallax'] = 'data-uk-parallax="{bg: \'-400\'}"';
+            }
 
-                    $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
-                    $classes['navbar'] .= ' tm-navbar-contrast';
+            if ($params['hero_contrast'] && $params['hero_image']) {
+                $classes['hero'] .= ' uk-contrast';
+            }
 
-                } else {
-                    $sticky['clsinactive'] = 'tm-navbar-transparent';
-                }
+            if ($params['hero_style']) {
+                $classes['hero'] .= ' '.$params['hero_style'];
+            }
 
+            if ($params['hero_blend'] && $params['hero_image']) {
+                $classes['hero'] .= ' tm-background-blend-'.$params['hero_blend'];
             }
 
             if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
@@ -157,6 +193,30 @@ return [
             }
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
+			
+			
+			
+			// body classes
+            if ($params['header_layout'] == 'centered') {
+                $classes['body'][] = 'tm-navbar-centered-true';
+            }
+
+            if ($params['header_sticky']) {
+                $classes['body'][] = 'tm-navbar-sticky';
+            }
+
+            if ($params['footer_fixed']) {
+                $classes['body'][] = 'tm-footer-fixed';
+            }
+
+            if (!$view->position()->exists('hero')) {
+                $classes['body'][] = 'tm-header-offset';
+            }
+
+            if (key_exists('body', $classes)) {
+                $classes['body'] = sprintf('class="%s"', trim(implode(' ', $classes['body'])));
+            }
+			
 
             $params['classes'] = $classes;
         },
