@@ -126,57 +126,253 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
-            <label for="form-bottom-style" class="uk-form-label">Bottom {{ 'Position' | trans }}</label>
-            <div class="uk-form-controls">
-                <select id="form-bottom-style" class="uk-form-width-large" v-model="node.theme.bottom_style">
-                    <option value="uk-block-default">{{ 'Default' | trans }}</option>
-                    <option value="uk-block-muted">{{ 'Muted' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast">{{ 'Primary' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast">{{ 'Secondary' | trans }}</option>
-					<option value="uk-block-default tm-block-fullwidth">{{ 'Default and fullwidth' | trans }}</option>
-					<option value="uk-block-muted tm-block-fullwidth">{{ 'Muted and fullwidth' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast tm-block-fullwidth">{{ 'Primary and fullwidth' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast tm-block-fullwidth">{{ 'Secondary and fullwidth' | trans }}</option>
-					<option value="uk-block-default tm-block-padding-large tm-block-fullwidth">{{ 'Default, padding-large and fullwidth' | trans }}</option>
-					<option value="uk-block-muted tm-block-padding-large tm-block-fullwidth">{{ 'Muted, padding-large and fullwidth' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast tm-block-padding-large tm-block-fullwidth">{{ 'Primary, padding-large and fullwidth' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast tm-block-padding-large tm-block-fullwidth">{{ 'Secondary, padding-large and fullwidth' | trans }}</option>
-                </select>
-            </div>
-        </div>
+
+		<hr class="uk-article-divider">
+		<h2 class="uk-margin-remove">{{ 'Position Appearance' | trans }}</h2>
+		<p>{{ 'Choose the appearance settings for each position.' | trans }}</p>
+		<div class="uk-form-row">
+		<table class="uk-table uk-table-middle tm-width uk-text-center">
+			<thead>
+				<tr>
+					<th class="uk-text-left">{{ 'Position' | trans }}</th>
+					<th class="uk-text-center">{{ 'Background' | trans }}</th>
+					<th class="uk-text-center">{{ 'Padding' | trans }}</th>
+					<th class="uk-text-center">{{ 'Block width' | trans }}</th>
+					<th class='uk-text-center'>{{ 'Divider' | trans }}</th>
+					<th class='uk-text-center'>{{ 'Contrast' | trans }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-bottom-d-style" class="uk-form-label">{{ 'Bottom' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td class='uk-text-center'>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_block_contrast"></label>
+						</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-bottom-d-style" class="uk-form-label">{{ 'Bottom B' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-b-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_b_block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-b-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_b_block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-b-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_b_container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_b_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_b_block_contrast"></label>
+						</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-bottom-d-style" class="uk-form-label">{{ 'Bottom C' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-c-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_c_block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-c-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_c_block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-c-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_c_container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_c_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_c_block_contrast"></label>
+						</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-bottom-d-style" class="uk-form-label">{{ 'Bottom D' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-d-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_d_block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-d-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_d_block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-bottom-d-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_d_container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_d_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_d_block_contrast"></label>
+						</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-footer-style" class="uk-form-label">{{ 'Footer' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-footer-block-bg" class="uk-form-width-medium" v-model="node.theme.footer_block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-footer-block-padding" class="uk-form-width-medium" v-model="node.theme.footer_block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-footer-container-width" class="uk-form-width-medium" v-model="node.theme.footer_container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.footer_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.footer_block_contrast"></label>
+						</p>
+					</td>
+				</tr>
+        	</tbody>
+		</table>
+		</div>
 		
         <div class="uk-form-row">
-            <label for="form-bottom-d-style" class="uk-form-label">Bottom D {{ 'Position' | trans }}</label>
-            <div class="uk-form-controls">
-                <select id="form-bottom-d-style" class="uk-form-width-large" v-model="node.theme.bottom_d_style">
-                    <option value="uk-block-default">{{ 'Default' | trans }}</option>
-                    <option value="uk-block-muted">{{ 'Muted' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast">{{ 'Primary' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast">{{ 'Secondary' | trans }}</option>
-					<option value="uk-block-default tm-block-fullwidth">{{ 'Default and fullwidth' | trans }}</option>
-					<option value="uk-block-muted tm-block-fullwidth">{{ 'Muted and fullwidth' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast tm-block-fullwidth">{{ 'Primary and fullwidth' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast tm-block-fullwidth">{{ 'Secondary and fullwidth' | trans }}</option>
-					<option value="uk-block-default tm-block-padding-large tm-block-fullwidth">{{ 'Default, padding-large and fullwidth' | trans }}</option>
-					<option value="uk-block-muted tm-block-padding-large tm-block-fullwidth">{{ 'Muted, padding-large and fullwidth' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast tm-block-padding-large tm-block-fullwidth">{{ 'Primary, padding-large and fullwidth' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast tm-block-padding-large tm-block-fullwidth">{{ 'Secondary, padding-large and fullwidth' | trans }}</option>
-                </select>
-            </div>
-        </div>
-		
-        <div class="uk-form-row">
-            <label for="form-footer-style" class="uk-form-label">Footer {{ 'Position' | trans }}</label>
-            <div class="uk-form-controls">
-                <select id="form-footer-style" class="uk-form-width-large" v-model="node.theme.footer_style">
-                    <option value="uk-block-default">{{ 'Default' | trans }}</option>
-                    <option value="uk-block-muted">{{ 'Muted' | trans }}</option>
-                    <option value="uk-block-primary uk-contrast">{{ 'Primary' | trans }}</option>
-                    <option value="uk-block-secondary uk-contrast">{{ 'Secondary' | trans }}</option>
-                </select>
                 <p class="uk-form-help-block uk-margin">{{ 'Note: Position settings only work if you publish a widget in that position.' | trans }}</p>
-            </div>
         </div>
 
     </div>

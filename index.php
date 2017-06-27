@@ -41,10 +41,15 @@ return [
         'top' => 'Top',
         'sidebar' => 'Sidebar',
         'bottom' => 'Bottom',
+		'bottom_b' => 'Bottom B',
+		'bottom_c' => 'Bottom C',
 		'bottom_d' => 'Bottom D',
+        'bottom_offset' => 'Bottom Offset',
+        'footer' => 'Footer Main',
         'footer_left' => 'Footer Left',
         'footer_right' => 'Footer Right',
-        'offcanvas' => 'Offcanvas'
+        'offcanvas' => 'Offcanvas',
+        'fixed_bar' => 'Fixed Bar'
 
     ],
 
@@ -67,11 +72,40 @@ return [
         'hero_parallax' => '',
         'top_style' => 'uk-block-muted',
 		'main_style' => 'uk-block-default',
-		'bottom_style' => 'uk-block-muted',
-		'bottom_d_style' => 'uk-block-primary uk-contrast',
-        'image_alt' => '',
+		'image_alt' => '',
         'contrast_alt' => '',
-        'footer_style' => 'uk-block-secondary uk-contrast'
+		
+		'bottom_block_bg' => 'uk-block-default',
+		'bottom_block_padding' => '',
+		'bottom_container_width' => 'uk-container uk-container-center',
+		'bottom_block_divider' => false,
+		'bottom_block_contrast' => false,
+		
+		'bottom_b_block_bg' => 'uk-block-default',
+		'bottom_b_block_padding' => '',
+		'bottom_b_container_width' => 'uk-container uk-container-center',
+		'bottom_b_block_divider' => false,
+		'bottom_b_block_contrast' => false,
+		
+		'bottom_c_block_bg' => 'uk-block-default',
+		'bottom_c_block_padding' => '',
+		'bottom_c_container_width' => 'uk-container uk-container-center',
+		'bottom_c_block_divider' => false,
+		'bottom_c_block_contrast' => false,
+		
+		'bottom_d_block_bg' => 'uk-block-default',// uk-contrast',
+		'bottom_d_block_padding' => '',
+		'bottom_d_container_width' => 'uk-container uk-container-center',
+		'bottom_d_block_divider' => false,
+		'bottom_d_block_contrast' => false,
+		
+		'footer_block_bg' => 'uk-block-default',// uk-contrast',
+		'footer_block_padding' => '',
+		'footer_container_width' => 'uk-container uk-container-center',
+		'footer_block_divider' => false,
+		'footer_block_contrast' => false,
+
+        //'footer_style' => 'uk-block-secondary uk-contrast'
     ],
 
     /**

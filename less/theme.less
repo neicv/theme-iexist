@@ -44,7 +44,7 @@
 @theme-footer-padding-large-vertical:           95px;
 
 @theme-footer-totop-size:                       40px;
-@theme-footer-totop-color:                      fade(@global-secondary-color, 60%);
+@theme-footer-totop-color:                      fade(@global-primary-color, 60%);//fadein(@global-muted-color, 50%);//fade(@global-secondary-color, 60%);
 @theme-footer-totop-hover-color:                @global-secondary-highlight-color;
 @theme-footer-totop-active-color:               @global-primary-color;
 
@@ -81,6 +81,20 @@
 //
 
 @theme-body-background:                         @global-secondary-background;
+
+// Block
+@theme-block-divider-icon:                          "";
+@theme-block-divider-left:                          50%;
+@theme-block-divider-width:                         100px;
+@theme-block-divider-large-width:                   150px;
+@theme-block-divider-height:                        1px;
+@theme-block-divider-background:                    @global-border;
+@theme-block-primary-divider-background:            @global-contrast-color;
+@theme-block-secondary-divider-background:          @global-border;
+@theme-block-divider-font-size:                     @theme-block-divider-height;
+@theme-block-divider-color:                         rgba(0,0,0,0);
+@theme-block-primary-divider-color:                 rgba(0,0,0,0);
+@theme-block-secondary-divider-color:               rgba(0,0,0,0);
 
 //
 // Header Offset for Fullscreen
@@ -144,12 +158,92 @@
 
 
 //
+// Additions
+// 
+
+@theme-fixed-bar-width:                                         60px;
+
+// 'tm-dotnav-follower'
+@theme-dotnav-active-background:                                @dotnav-active-background; 
+
+//
 // Avanti Grid
 //
 
 @theme-badge-muted-background:                  @global-light-background;
 @theme-badge-muted-color:                       @global-highlight-color;
 @theme-grid-divider-border:                     @grid-divider-border;
+
+
+
+/* Layout
+ ========================================================================== */
+
+//
+// Blocks
+//
+
+// Adjust padding between equally colored blocks
+.uk-block-default:not(.tm-block-padding-collapse) + .uk-block-default:not(.tm-block-divider),
+.uk-block-muted:not(.tm-block-padding-collapse) + .uk-block-muted:not(.tm-block-divider),
+.uk-block-primary:not(.tm-block-padding-collapse) + .uk-block-primary:not(.tm-block-divider),
+.uk-block-secondary:not(.tm-block-padding-collapse) + .uk-block-secondary:not(.tm-block-divider) { padding-top: 0; }
+
+// Add padding to article, if main top or main bottom are published
+.tm-main-top + .tm-content,
+.tm-content + .tm-main-bottom {
+
+    padding-top:  @grid-gutter-vertical;
+
+    // Large screen
+    @media (min-width: @breakpoint-xlarge) { padding-top:  @grid-gutter-large-vertical; }
+
+}
+
+// Block padding collapse
+.tm-block-padding-collapse {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+// Block divider
+
+.tm-block-divider { position: relative; }
+
+.tm-block-divider:before {
+    content: @theme-block-divider-icon;
+    position: absolute;
+    top: -(@theme-block-divider-height / 2);
+    left: @theme-block-divider-left;
+    margin-left: -(@theme-block-divider-width / 2);
+    width: @theme-block-divider-width;
+    height: @theme-block-divider-height;
+    background: @theme-block-divider-background;
+    font-family: 'Chester Divider';
+    font-size: @theme-block-divider-font-size;
+    line-height: @theme-block-divider-font-size;
+    color: @theme-block-divider-color;
+
+    // Large screen and bigger
+    @media (min-width: @breakpoint-xlarge) {
+        margin-left: -(@theme-block-divider-large-width / 2);
+        width: @theme-block-divider-large-width;
+    }
+
+}
+
+.uk-block-primary.tm-block-divider:before {
+    background: @theme-block-primary-divider-background;
+    color: @theme-block-primary-divider-color
+}
+
+.uk-block-secondary.tm-block-divider:before {
+    background: @theme-block-secondary-divider-background;
+    color: @theme-block-secondary-divider-color;
+}
+ 
+
+
  
 /* ========================================================================
    Component: Container
@@ -681,6 +775,22 @@ html { overflow-y: scroll; }
 
 }
 
+//
+// Fixed-Bar
+//
+
+// Large screens
+@media (min-width: @breakpoint-medium) {
+
+    .tm-fixed-bar {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: @theme-fixed-bar-width;
+        z-index: 2;
+    }
+}
 
 
 
