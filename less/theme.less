@@ -63,6 +63,9 @@
 @global-primary-color:                          @global-link-color;
 @global-primary-link-color:                     #675642;
 
+@global-primary-muted-color:                    fade(saturate(darken(@global-primary-link-color, 10%), 10%), 70%);
+@global-primary-highlight-color:                #181822;
+
 @global-theme-icon-font-family:                 'theme-icons'; 
 @global-transition:                             all 0.12s ease-in-out;
 
@@ -143,6 +146,7 @@
 @theme-navbar-dropdown-width:                   200px;
 @theme-navbar-icon-search:                      "\e036";
 @theme-navbar-icon-more:                        "\e900";
+@theme-navbar-icon-login:                       "\e2c0";
 
 @navbar-dropdown-grid-gutter-horizontal:        @global-gutter;
 @navbar-dropdown-grid-gutter-vertical:          @navbar-dropdown-grid-gutter-horizontal;
@@ -150,21 +154,29 @@
 @navbar-dropdown-dropbar-margin-bottom:         30px;
 @navbar-dropdown-nav-divider-border:            @global-border;
 
-@theme-navbar-more-color:                                       @global-muted-color;
-@theme-navbar-more-hover-background:                            @button-background;
-@theme-navbar-more-hover-color:                                 @global-muted-color;
-@theme-navbar-more-active-background:                           @button-hover-background;
-@theme-navbar-more-active-color:                                @global-color;
+@theme-navbar-more-color:                       @global-muted-color;
+@theme-navbar-more-hover-background:            @button-background;
+@theme-navbar-more-hover-color:                 @global-muted-color;
+@theme-navbar-more-active-background:           @button-hover-background;
+@theme-navbar-more-active-color:                @global-color;
 
 
 //
 // Additions
 // 
 
-@theme-fixed-bar-width:                                         60px;
+@theme-fixed-bar-width:                         60px;
+
+// 'tm-address-horizontal' for <address></address>
+@theme-address-horizontal-label-width:                          100px;
+@theme-address-horizontal-data-margin:                          100px;
+@theme-address-horizontal-label-font-size:                      @global-ui-font-size;
+@theme-address-horizontal-label-color:                          @global-highlight-color;
 
 // 'tm-dotnav-follower'
-@theme-dotnav-active-background:                                @dotnav-active-background; 
+@theme-dotnav-active-background:                @dotnav-active-background; 
+
+@theme-smoothscroll-bar-width:                 (@dotnav-width + (@dotnav-border-width * 2)); 
 
 //
 // Avanti Grid
@@ -474,7 +486,7 @@ html { overflow-y: scroll; }
 /*
  * Footer
  */
-
+/*
 .tm-footer {
     padding-top: 30px;
     padding-bottom: 30px;
@@ -482,7 +494,7 @@ html { overflow-y: scroll; }
 }
 
 /* Tablet and bigger */
-@media (min-width: @breakpoint-medium) {
+/*@media (min-width: @breakpoint-medium) {
 
     .tm-footer {
         padding-top: 50px;
@@ -490,8 +502,8 @@ html { overflow-y: scroll; }
     }
 
 }
-
-
+ 
+*/
 /* Blog
  ========================================================================== */
 
@@ -684,6 +696,7 @@ html { overflow-y: scroll; }
 
 // Navbar search + more
 .tm-navbar .tm-search,
+.tm-navbar .tm-login,
 .tm-navbar .tm-more {
 
     // Search button
@@ -718,6 +731,7 @@ html { overflow-y: scroll; }
     // Icons
     .tm-search-button::before { content: @theme-navbar-icon-search; }
     .tm-more-button::before { content: @theme-navbar-icon-more; }
+	.tm-login-button::before { content: @theme-navbar-icon-login; }
 
     // Dropdown style
     .tm-navbar-dropdown {
@@ -729,7 +743,7 @@ html { overflow-y: scroll; }
 }
 
 // Hiding the default icon
-.tm-navbar .tm-search .uk-search::before { display: none; }
+.tm-navbar .tm-search .uk-search .tm-login::before { display: none; }
 
 // Search field width
 //.tm-navbar .tm-search .tm-search-dropdown .uk-search-field,
@@ -792,7 +806,19 @@ html { overflow-y: scroll; }
     }
 }
 
+//
+// Smoothscroll navigation
+//
 
+.tm-smoothscroll-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: @theme-smoothscroll-bar-width;
+    padding-right: 15px;
+    z-index: @global-z-index;
+}
 
 
 // Style modifications
@@ -1010,10 +1036,28 @@ html { overflow-y: scroll; }
     padding-bottom: @theme-footer-padding-vertical;
 }
 
+
 .tm-footer {
     position: relative;
     min-height: @theme-footer-height;
 }
+
+.tm-footer + .tm-footer-meta {
+    box-sizing: border-box;
+    margin: @global-margin-large 0 0 0;
+    border-top: @global-border-width solid @global-border;
+}
+
+
+// Border color
+.uk-contrast .tm-footer + .tm-footer-meta { border-top-color: @global-secondary-border; }
+.uk-contrast-primary .tm-footer + .tm-footer-meta { border-top-color: @global-primary-border; }
+
+.tm-footer-meta {
+    position: relative;
+    min-height: @theme-footer-height;
+}
+
 
 @media (min-width: @breakpoint-medium) {
 
@@ -1141,6 +1185,18 @@ html { overflow-y: scroll; }
 
 } 
 
+// uk-contrast
+.uk-contrast .tm-footer-meta .tm-totop-scroller::before { color: @global-secondary-muted-color; }
+.uk-contrast .tm-footer-meta .tm-totop-scroller:hover::before { color: @global-secondary-highlight-color; }
+.uk-contrast .tm-footer-meta .tm-totop-scroller:focus::before,
+.uk-contrast .tm-footer-meta .tm-totop-scroller:active::before { color: @global-secondary-highlight-color; }
+
+// uk-contrast-primary
+.uk-contrast-primary .tm-footer-meta .tm-totop-scroller::before { color: @global-primary-muted-color; }
+.uk-contrast-primary .tm-footer-meta .tm-totop-scroller:hover::before { color: @global-primary-highlight-color; }
+.uk-contrast-primary .tm-footer-meta .tm-totop-scroller:focus::before,
+.uk-contrast-primary .tm-footer-meta .tm-totop-scroller:active::before { color: @global-primary-highlight-color; }
+
 // Miscellaneous
 // ========================================================================
 
@@ -1181,6 +1237,66 @@ html { overflow-y: scroll; }
     }
 */
 }
+
+// Theme Additions
+// ==========================================================================
+
+//
+// Font modifiers
+//
+
+.tm-font {
+    font-family: @global-font-family;
+    font-weight: @global-font-weight;
+    text-transform: @global-text-transform;
+    letter-spacing: @global-letter-spacing;
+}
+
+.tm-font-alt-1 {
+    font-family: @global-alt-1-font-family;
+    font-weight: @global-alt-1-font-weight;
+    text-transform: @global-alt-1-text-transform;
+    letter-spacing: @global-alt-1-letter-spacing;
+}
+
+.tm-font-alt-2 {
+    font-family: @global-alt-2-font-family;
+    font-weight: @global-alt-2-font-weight;
+    text-transform: @global-alt-2-text-transform;
+    letter-spacing: @global-alt-2-letter-spacing;
+}
+
+//
+// Horizontal address
+//
+
+.tm-address-horizontal .tm-label {
+    font-size: @theme-address-horizontal-label-font-size;
+    color: @theme-address-horizontal-label-color;
+}
+
+// Large screens
+@media (min-width: @breakpoint-xlarge) {
+
+    .tm-address-horizontal .tm-label {
+        width: @theme-address-horizontal-label-width;
+        float: left;
+        clear: both;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .tm-address-horizontal .tm-data { margin-left: @theme-address-horizontal-data-margin; }
+
+}
+
+// uk-contrast color
+.uk-contrast .tm-address-horizontal .tm-label { color: @global-secondary-highlight-color; }
+
+// uk-contrast-primary color
+.uk-contrast-primary .tm-address-horizontal .tm-label { color: @global-primary-highlight-color; }
+
 
 // Hooks
 // ========================================================================

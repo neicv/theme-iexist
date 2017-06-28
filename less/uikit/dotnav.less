@@ -1,20 +1,7 @@
-// Name:            Dotnav
-// Description:     Defines styles for a dot navigation
+// Copyright (C) YOOtheme GmbH, YOOtheme Proprietary Use License (http://www.yootheme.com/license) */
+
 //
-// Component:       `uk-dotnav`
-//
-// Modifier:        `uk-dotnav-contrast`
-//                  `uk-dotnav-vertical`
-//
-// States:          `uk-active`
-//
-// Markup:
-//
-// <!-- uk-dotnav -->
-// <ul class="uk-dotnav">
-//     <li class="uk-active"><a href=""></a></li>
-//     <li><a href=""></a></li>
-// </ul>
+// Component: Dotnav
 //
 // ========================================================================
 
@@ -22,191 +9,89 @@
 // Variables
 // ========================================================================
 
-@dotnav-margin-horizontal:                      15px;
-@dotnav-margin-vertical:                        @dotnav-margin-horizontal;
+@dotnav-width:                                  18px;
+@dotnav-background:                             rgba(0,0,0,0);
+@dotnav-border:                                 rgba(0,0,0,0);
+@dotnav-hover-background:                       rgba(0,0,0,0);
+@dotnav-onclick-background:                     @dotnav-hover-background;
+@dotnav-active-background:                      @dotnav-hover-background;
 
-@dotnav-width:                                  20px;
-@dotnav-height:                                 @dotnav-width;
-@dotnav-background:                             rgba(50,50,50,0.1);
+@dotnav-contrast-background:                    rgba(0,0,0,0);
+@dotnav-contrast-hover-background:              rgba(0,0,0,0);
+@dotnav-contrast-onclick-background:            @dotnav-contrast-hover-background;
+@dotnav-contrast-active-background:             @dotnav-contrast-hover-background;
 
-@dotnav-hover-background:                       rgba(50,50,50,0.4);
-@dotnav-onclick-background:                     rgba(50,50,50,0.6);
-@dotnav-active-background:                      rgba(50,50,50,0.4);
+//
+// New
+//
 
-@dotnav-contrast-background:                    rgba(255,255,255,0.4);
-@dotnav-contrast-hover-background:              rgba(255,255,255,0.7);
-@dotnav-contrast-onclick-background:            rgba(255,255,255,0.9);
-@dotnav-contrast-active-background:             rgba(255,255,255,0.9);
+@dotnav-border-width:                            2px;
+@dotnav-hover-border:                            @global-primary-color;
+@dotnav-onclick-border:                          @global-primary-color;
+@dotnav-active-border:                           @global-primary-color;
 
+@dotnav-contrast-hover-border:                   @global-contrast-color;
+@dotnav-contrast-onclick-border:                 @global-contrast-color;
+@dotnav-contrast-active-border:                  @global-contrast-color;
 
-/* ========================================================================
-   Component: Dotnav
- ========================================================================== */
+@dotnav-before-width:                            8px;
+@dotnav-before-height:                           @dotnav-before-width;
+@dotnav-before-background:                       rgba(0,0,0,0.12);
+@dotnav-before-hover-background:                 rgba(0,0,0,0);
 
-/*
- * 1. Gutter
- * 2. Remove default list style
- */
-
-.uk-dotnav {
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    /* 1 */
-    margin-left: -@dotnav-margin-horizontal;
-    margin-top: -@dotnav-margin-vertical;
-    /* 2 */
-    padding: 0;
-    list-style: none;
-}
-
-/*
- * 1. Space is allocated solely based on content dimensions
- * 2. Horizontal gutter is using `padding` so `uk-width-*` classes can be applied
- */
-
-.uk-dotnav > * {
-    /* 1 */
-    -ms-flex: none;
-    -webkit-flex: none;
-    flex: none;
-    /* 2 */
-    padding-left: @dotnav-margin-horizontal;
-    margin-top: @dotnav-margin-vertical;
-}
-
-/*
- * DEPRECATED IE9 Support
- */
-
-.uk-dotnav:before,
-.uk-dotnav:after {
-    content: "";
-    display: block;
-    overflow: hidden;
-}
-
-.uk-dotnav:after { clear: both; }
-
-.uk-dotnav > * { float: left; }
+@dotnav-contrast-before-background:              @global-contrast-color;
 
 
-/* Items
- ========================================================================== */
-
-/*
- * Items
- * 1. Hide text if present
- */
-
-.uk-dotnav > * > * {
-    display: block;
-    box-sizing: content-box;
-    width: @dotnav-width;
-    height: @dotnav-height;
-    border-radius: 50%;
-    background: @dotnav-background;
-    /* 1 */
-    text-indent: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    .hook-dotnav-item;
-}
-
-/*
- * Hover
- * 1. Apply hover style also to focus state
- * 2. Remove default focus style
- */
-
-.uk-dotnav > * > :hover,
-.uk-dotnav > * > :focus { // 1
-    background: @dotnav-hover-background;
-    /* 2 */
-    outline: none;
-    .hook-dotnav-item-hover;
-}
-
-/* OnClick */
-.uk-dotnav > * > :active {
-    background: @dotnav-onclick-background;
-    .hook-dotnav-item-onclick;
-}
-
-/* Active */
-.uk-dotnav > .uk-active > * {
-    background: @dotnav-active-background;
-    .hook-dotnav-item-active;
-}
-
-
-/* Modifier: `uk-dotnav-contrast`
- ========================================================================== */
-
-.uk-dotnav-contrast > * > * {
-    background: @dotnav-contrast-background;
-    .hook-dotnav-contrast-item;
-}
-
-/*
- * Hover
- * 1. Apply hover style also to focus state
- */
-
-.uk-dotnav-contrast > * > :hover,
-.uk-dotnav-contrast > * > :focus { // 1
-    background: @dotnav-contrast-hover-background;
-    .hook-dotnav-contrast-item-hover;
-}
-
-/* OnClick */
-.uk-dotnav-contrast > * > :active {
-    background: @dotnav-contrast-onclick-background;
-    .hook-dotnav-contrast-item-onclick;
-}
-
-/* Active */
-.uk-dotnav-contrast > .uk-active > * {
-    background: @dotnav-contrast-active-background;
-    .hook-dotnav-contrast-item-active;
-}
-
-
-/* Modifier: 'uk-dotnav-vertical'
- ========================================================================== */
-
-/*
- * DEPRECATED
- */
-
-.uk-dotnav-vertical {
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-}
-
-/*
- * DEPRECATED IE9 Support
- */
-
-.uk-dotnav-vertical > * { float: none; }
-
-
-
-// Hooks
+// Component
 // ========================================================================
 
-.hook-dotnav-misc;
+.hook-dotnav-item() {
+    border: @dotnav-border-width solid @dotnav-border;
+    -webkit-transition: border .3s;
+    transition: border .3s;
+}
 
-.hook-dotnav-item() {}
-.hook-dotnav-item-hover() {}
-.hook-dotnav-item-onclick() {}
-.hook-dotnav-item-active() {}
+.hook-dotnav-item-hover() { border-color: @dotnav-hover-border; }
+
+.hook-dotnav-item-onclick() { border-color:  @dotnav-onclick-border; }
+
+.hook-dotnav-item-active() { border-color: @dotnav-active-border; }
+
 .hook-dotnav-contrast-item() {}
-.hook-dotnav-contrast-item-hover() {}
-.hook-dotnav-contrast-item-onclick() {}
-.hook-dotnav-contrast-item-active() {}
-.hook-dotnav-misc() {}
+
+.hook-dotnav-contrast-item-hover() { border-color: @dotnav-contrast-hover-border; }
+
+.hook-dotnav-contrast-item-onclick() { border-color: @dotnav-contrast-onclick-border; }
+
+.hook-dotnav-contrast-item-active() { border-color: @dotnav-contrast-active-border; }
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-dotnav-misc() {
+
+    .uk-dotnav > li { position: relative; }
+
+    .uk-dotnav > li > a:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: @dotnav-width + 4px;
+        width: @dotnav-before-width;
+        height: @dotnav-before-height;
+        margin-top: -(@dotnav-before-width / 2);
+        background: @dotnav-before-background;
+        border-radius: 50%;
+    }
+
+    .uk-dotnav > li.uk-active > a:before,
+    .uk-dotnav > li > a:hover:before,
+    .uk-dotnav > li > a:active:before {
+        content: '';
+        background: @dotnav-before-hover-background;
+    }
+
+    .uk-dotnav-contrast > li > a:before { background: @dotnav-contrast-before-background; }
+
+}

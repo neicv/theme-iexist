@@ -80,19 +80,9 @@
 			</div>
 		</div>
 
-	<!--
-    < ?php if ($this['widgets']->count('bottom-d')) : ?>
-    <div id="tm-bottom-d" class="uk-block tm-block-bottom-d < ?php echo @$block_classes['bottom-d']; echo $display_classes['bottom-d']; ?>">
-        <div class="< ?php echo $container_class['bottom-d']; ?>">
-            <section class="< ?php echo @$grid_classes['bottom-d']; ?>" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>< ?php echo $this['widgets']->render('bottom-d', array('layout'=>$this['config']->get('grid.bottom-d.layout'))); ?></section>
-        </div>
-    </div>
-    < ?php endif; ?>
-	-->
-	
 		<?php if ($view->position()->exists('bottom_b')) : ?>
         <div id="tm-bottom-b" class="tm-bottom-b uk-block <?php echo $params['bottom_b_block_bg']; echo $params['bottom_b_block_padding']; echo $params['bottom_b_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_b_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<? $params['bottom_b_container_width']; ?>">
+			<div class="<?= $params['bottom_b_container_width'] ?>">
                 <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
                     <?= $view->position('bottom_b', 'position-grid.php') ?>
                 </section>
@@ -102,7 +92,7 @@
 	
 		<?php if ($view->position()->exists('bottom_c')) : ?>
         <div id="tm-bottom-c" class="tm-bottom-c uk-block <?php echo $params['bottom_c_block_bg']; echo $params['bottom_c_block_padding']; echo $params['bottom_c_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_c_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<? $params['bottom_d_container_width']; ?>">
+			<div class="<?= $params['bottom_d_container_width'] ?>">
                 <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
                     <?= $view->position('bottom_c', 'position-grid.php') ?>
                 </section>
@@ -112,7 +102,7 @@
 		
 		<?php if ($view->position()->exists('bottom_d')) : ?>
         <div id="tm-bottom-d" class="tm-bottom-d uk-block <?php echo $params['bottom_d_block_bg']; echo $params['bottom_d_block_padding']; echo $params['bottom_d_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_d_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<? $params['bottom_d_container_width']; ?>">
+			<div class="<?php echo $params['bottom_d_container_width']; ?>">
                 <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
                     <?= $view->position('bottom_d', 'position-grid.php') ?>
                 </section>
@@ -121,10 +111,23 @@
         <?php endif ?>
 		
 		
+		<?php if ($view->position()->exists('footer') || $view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
 		
-        <?php if ($view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
-            <?= $view->position('footer_left', 'footer-'.$params['footer_layout'].'.php') ?>
-        <?php endif ?>
+		<div class="tm-block-footer uk-block <?php echo $params['footer_block_bg']; echo $params['footer_block_padding']; echo $params['footer_block_divider'] ? ' tm-block-divider' : ''; echo $params['footer_block_contrast'] ? ' uk-contrast' : '';  ?>">
+			<div class="<?= $params['footer_container_width'] ?>">
+				<?php if ($view->position()->exists('footer')) : ?>
+				<section class="tm-footer uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('footer', 'position-grid.php') ?>
+				</section>
+				<?php endif ?>
+			
+				
+				<?php if ($view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
+					<?= $view->position('footer_left', 'footer-'.$params['footer_layout'].'.php') ?>
+				<?php endif ?>
+			</div>	
+		</div>	
+		<?php endif ?>
 
         <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
@@ -155,6 +158,12 @@
             <?= $view->position('fixed_bar', 'position-blank.php') ?>
         </div>
         <?php endif ?>
+		
+		<?php if ($view->position()->exists('smoothscroll')) : ?>
+            <div class="tm-smoothscroll-bar uk-flex uk-flex-middle uk-visible-large">
+ 				<?= $view->position('smoothscroll', 'position-blank.php') ?>
+            </div>
+        <?php endif; ?>
 
         <?= $view->render('footer') ?>
 	<!--</div>-->

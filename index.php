@@ -49,7 +49,8 @@ return [
         'footer_left' => 'Footer Left',
         'footer_right' => 'Footer Right',
         'offcanvas' => 'Offcanvas',
-        'fixed_bar' => 'Fixed Bar'
+        'fixed_bar' => 'Fixed Bar',
+		'smoothscroll' => 'Smoothscroll'
 
     ],
 

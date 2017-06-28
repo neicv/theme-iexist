@@ -30,10 +30,15 @@
 @global-secondary-highlight-color:              #fff;
 @global-secondary-inverted-color:               #222;
 
+@global-secondary-border:                       fade(@global-secondary-highlight-color, 6%);
+@global-secondary-hover-border:                 fade(@global-secondary-highlight-color, 12%);
+
+@global-secondary-muted-color:                  fade(@global-secondary-color, 50%);
+
 @global-dark-color:                             #222;
 @global-contrast-color:                         #fff;
 
-@global-font-family:                            'Lora', Times New Roman, serif;
+@global-font-family:                            'Lora', Open Sans, Times New Roman, serif;
 @global-alternate-font-family:                  'Lato', Helvetica, Arial, sans-serif;
 
 @global-font-size:                              14px;
@@ -53,14 +58,24 @@
 //
 
 //@global-font-family:                            Nunito Sans;
-@global-body-font-family:                       'Lato';
-@global-alt-font-family:                        'Lora';
+@global-body-font-family:                       'Lato', Open Sans, Arial, sans-serif;;
+@global-alt-font-family:                        'Lora', Helvetica, Arial, sans-serif;;
+@global-alt-1-font-family:                      'Montserrat', Helvetica, Arial, sans-serif;
+@global-alt-2-font-family:                      'Lora', Helvetica, Arial, sans-serif;
 @global-font-weight:                            normal;
 @global-letter-spacing:                         2px;
 @global-text-transform:                         uppercase;
 
 @global-font-size:                              17px;
 @global-line-height:                            1.58;      // 27px
+
+@global-alt-1-font-weight:                      400;
+@global-alt-2-font-weight:                      400;
+@global-alt-1-text-transform:                   none;
+@global-alt-1-letter-spacing:                   0;
+@global-alt-2-text-transform:                   @global-text-transform;
+@global-alt-2-letter-spacing:                   @global-letter-spacing;
+@global-ui-font-size:                           12px;
 
 @global-xxlarge-font-size:                      46px;
 @global-xlarge-font-size:                       38px;
@@ -114,6 +129,9 @@
 @global-danger-active-background:               #d2232d;
 
 @global-warning-background:                     #FFB24E;
+
+@global-primary-border:                         desaturate(darken(@global-primary-background, 8%), 8%);
+@global-primary-hover-border:                   desaturate(darken(@global-primary-background, 15%), 8%);
 
 //
 // Spacings
