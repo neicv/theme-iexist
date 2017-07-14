@@ -7,6 +7,7 @@
         <?= $view->render('head') ?>
  		<?php $view->style('theme', $params['style'] ? 'theme:css/theme.'.$params['style'].'.css' : 'theme:css/theme.css') ?>
         <?php $view->script('animatedtext', 'theme:js/animated-text.js', ['uikit']) ?>
+		<?php $view->script('lib', 'theme:js/lib.js', ['jQuery']) ?>
         <?php $view->script('theme', 'theme:js/theme.js', ['uikit-sticky',  'uikit-lightbox',  'uikit-parallax', 'uikit-slider', 'uikit-grid', 'uikit-accordion', 'uikit-tooltip', 'animtedtext']) ?>
     </head>
 	
@@ -34,82 +35,132 @@
         </div>
         <?php endif ?>
 
-		<!--<div class="uk-section-default" uk-scrollspy="{&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:false}">-->
-		<div class="uk-section-default">
-			<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large" 
-				<?php if ($params['image_alt']) : ?>
-				<?= $params['image_alt'] ? "style=\"background-image: url('{$view->url($params['image_alt'])}');\"" : '' ?>
-				
-				<?php elseif ($params['image']) : ?>
-				<?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>
-				<?php endif ?>
-				>
-				
-				<div class="tm-background">
-					<div class="uk-container uk-container-center">	
-						<?php if ($view->position()->exists('top')) : ?>
-						<section id="tm-top" class="tm-top uk-grid uk-grid-match" data-uk-grid-margin>
-							<?= $view->position('top', 'position-grid.php') ?>
-						</section>
-						<?php endif; ?>
-
-						<div id="tm-main" class="tm-main uk-grid" data-uk-grid-match data-uk-grid-margin>
-
-							<main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
-								<?= $view->render('content') ?>
-							</main>
-
-							<?php if ($view->position()->exists('sidebar')) : ?>
-							<aside class="uk-width-medium-1-4 <?= $params['sidebar_first'] ? 'uk-flex-order-first-medium' : ''; ?>">
-								<?= $view->position('sidebar', 'position-panel.php') ?>
-							</aside>
-							<?php endif ?>
-
-						</div>
-						
-
-						
-						<?php if ($view->position()->exists('bottom')) : ?>
-						<section id="tm-bottom" class="tm-bottom uk-grid uk-grid-match" data-uk-grid-margin>
-							<?= $view->position('bottom', 'position-grid.php') ?>
-						</section>
-						<?php endif; ?>
-						
-					</div>
+		
+			<?php if ($view->position()->exists('top')) : ?>
+			<div id="tm-top" class="tm-top uk-block <?php echo $params['top_block_bg']; echo $params['top_block_padding']; echo $params['top_block_divider'] ? ' tm-block-divider' : ''; echo $params['top_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['top_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('top', 'position-grid.php') ?>
+					</section>
 				</div>
 			</div>
-		</div>
+			<?php endif ?>
+			
+			<?php if ($view->position()->exists('top_b')) : ?>
+			<div id="tm-top-b" class="tm-top-b uk-block <?php echo $params['top_b_block_bg']; echo $params['top_b_block_padding']; echo $params['top_b_block_divider'] ? ' tm-block-divider' : ''; echo $params['top_b_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['top_b_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('top_b', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>		
+		
+		
+		<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large <?= $params['classes.image-alt'] ?>" 
+			<?php if ($params['image_alt_enable']) : ?>
+			<?php if ($params['image_alt']) : ?>
+			<?= $params['image_alt'] ? "style=\"background-image: url('{$view->url($params['image_alt'])}');\"" : '' ?>
+				
+			<?php elseif ($params['image']) : ?>
+			<?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>
+			<?php endif ?>
+			<?php endif ?>>
+				
+			<!--<div class="tm-background">-->
+			
 
-		<?php if ($view->position()->exists('bottom_b')) : ?>
-        <div id="tm-bottom-b" class="tm-bottom-b uk-block <?php echo $params['bottom_b_block_bg']; echo $params['bottom_b_block_padding']; echo $params['bottom_b_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_b_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<?= $params['bottom_b_container_width'] ?>">
-                <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('bottom_b', 'position-grid.php') ?>
-                </section>
-            </div>
-        </div>
-        <?php endif ?>
+			
+			<?php if ($view->position()->exists('top_c')) : ?>
+			<div id="tm-top-c" class="tm-top-c uk-block <?php echo $params['top_c_block_bg']; echo $params['top_c_block_padding']; echo $params['top_c_block_divider'] ? ' tm-block-divider' : ''; echo $params['top_c_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['top_c_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('top_c', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+
+			<?php if ($view->position()->exists('top_d')) : ?>
+			<div id="tm-top-d" class="tm-top-d uk-block <?php echo $params['top_d_block_bg']; echo $params['top_d_block_padding']; echo $params['top_d_block_divider'] ? ' tm-block-divider' : ''; echo $params['top_d_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['top_d_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('top_d', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+			
+			
+			<div id="tm-main" class="tm-main uk-block <?php echo $params['main_block_bg']; echo $params['main_block_padding']; echo $params['main_block_divider'] ? ' tm-block-divider' : ''; echo $params['main_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['main_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+					
+
+						
+						<main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-medium-1-1'; ?>">
+							<?php if ($params['breadcrumbs'] && $view->position()->exists('breadcrumbs') ) : ?>
+								<!--<div class="tm-breadcrumb-centered">-->
+								<div class="tm-breadcrumb">
+								<?= $view->position('breadcrumbs', 'position-blank.php') ?>
+								<!--<?= $view->render('breadcrumbs') ?>-->
+								</div>
+							<?php endif ?>
+							<?= $view->render('content') ?>
+						</main>
+						<?php if ($view->position()->exists('sidebar')) : ?>
+						<aside class="uk-width-medium-1-4 <?= $params['sidebar_first'] ? 'uk-flex-order-first-medium' : ''; ?>">
+							<?= $view->position('sidebar', 'position-panel.php') ?>
+						</aside>
+						<?php endif ?>
+				</div>
+			</div>
 	
-		<?php if ($view->position()->exists('bottom_c')) : ?>
-        <div id="tm-bottom-c" class="tm-bottom-c uk-block <?php echo $params['bottom_c_block_bg']; echo $params['bottom_c_block_padding']; echo $params['bottom_c_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_c_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<?= $params['bottom_d_container_width'] ?>">
-                <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('bottom_c', 'position-grid.php') ?>
-                </section>
-            </div>
-        </div>
-        <?php endif ?>
 		
-		<?php if ($view->position()->exists('bottom_d')) : ?>
-        <div id="tm-bottom-d" class="tm-bottom-d uk-block <?php echo $params['bottom_d_block_bg']; echo $params['bottom_d_block_padding']; echo $params['bottom_d_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_d_block_contrast'] ? ' uk-contrast' : '';  ?>">
-			<div class="<?php echo $params['bottom_d_container_width']; ?>">
-                <section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-                    <?= $view->position('bottom_d', 'position-grid.php') ?>
-                </section>
-            </div>
-        </div>
-        <?php endif ?>
+			<?php if ($view->position()->exists('bottom')) : ?>
+			<div id="tm-bottom" class="tm-bottom-b uk-block <?php echo $params['bottom_block_bg']; echo $params['bottom_block_padding']; echo $params['bottom_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['bottom_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('bottom', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+			
+			<?php if ($view->position()->exists('bottom_b')) : ?>
+			<div id="tm-bottom-b" class="tm-bottom-b uk-block <?php echo $params['bottom_b_block_bg']; echo $params['bottom_b_block_padding']; echo $params['bottom_b_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_b_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['bottom_b_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('bottom_b', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+			
+			
+		</div> <!-- Background Image -->	
 		
+			<?php if ($view->position()->exists('bottom_c')) : ?>
+			<div id="tm-bottom-c" class="tm-bottom-c uk-block <?php echo $params['bottom_c_block_bg']; echo $params['bottom_c_block_padding']; echo $params['bottom_c_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_c_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?= $params['bottom_d_container_width'] ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('bottom_c', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+			
+			<?php if ($view->position()->exists('bottom_d')) : ?>
+			<div id="tm-bottom-d" class="tm-bottom-d uk-block <?php echo $params['bottom_d_block_bg']; echo $params['bottom_d_block_padding']; echo $params['bottom_d_block_divider'] ? ' tm-block-divider' : ''; echo $params['bottom_d_block_contrast'] ? ' uk-contrast' : '';  ?>">
+				<div class="<?php echo $params['bottom_d_container_width']; ?>">
+					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+						<?= $view->position('bottom_d', 'position-grid.php') ?>
+					</section>
+				</div>
+			</div>
+			<?php endif ?>
+		
+
 		
 		<?php if ($view->position()->exists('footer') || $view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
 		

@@ -1,7 +1,7 @@
 <?php $view->script('posts', 'blog:app/bundle/posts.js', 'vue') ?>
 
 <?php foreach ($posts as $post) : ?>
-<article class="uk-article tm-article-blog">
+<article class="uk-article tm-article-blog tm-font-alt-1 tm-block-padding-collapse">
 
     <?php if ($image = $post->get('image.src')): ?>
     <div class="uk-grid uk-grid-xlarge uk-grid-width-medium-1-2" data-uk-grid-match="{target:'.uk-panel'}">
@@ -38,6 +38,7 @@
 
         <div>
             <div class="uk-panel tm-article-image" style="background: url('<?= $view->url($image) ?>') #FFF 50% 50% no-repeat; background-size: cover;">
+
                 <a class="uk-position-cover" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>">
                     <img class="uk-invisible" src="<?= $image ?>" alt="<?= $post->get('image.alt') ?>">
 

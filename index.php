@@ -38,9 +38,13 @@ return [
 	    'header_social' => 'Header Social',
 		'header_info' => 'Header Info',
         'hero' => 'Hero',
-        'top' => 'Top',
+        'top' => 'Top A',
+		'top_b' => 'Top B',
+		'top_c' => 'Top C',
+		'top_d' => 'Top D',
+		'breadcrumbs' => 'Breadcrumbs',
         'sidebar' => 'Sidebar',
-        'bottom' => 'Bottom',
+        'bottom' => 'Bottom A',
 		'bottom_b' => 'Bottom B',
 		'bottom_c' => 'Bottom C',
 		'bottom_d' => 'Bottom D',
@@ -71,10 +75,43 @@ return [
         'hero_viewport' => '',
         'hero_contrast' => '',
         'hero_parallax' => '',
-        'top_style' => 'uk-block-muted',
-		'main_style' => 'uk-block-default',
+        //'top_style' => 'uk-block-muted',
+		//'main_style' => 'uk-block-default',
+		'image_alt_enable' => false,
 		'image_alt' => '',
+		'image_alt_style' => '',
+		'image_alt_blend' => '',
         'contrast_alt' => '',
+		
+		'top_block_bg' => 'uk-block-default',
+		'top_block_padding' => '',
+		'top_container_width' => 'uk-container uk-container-center',
+		'top_block_divider' => false,
+		'top_block_contrast' => false,
+		
+		'top_b_block_bg' => 'uk-block-default',
+		'top_b_block_padding' => '',
+		'top_b_container_width' => 'uk-container uk-container-center',
+		'top_b_block_divider' => false,
+		'top_b_block_contrast' => false,
+		
+		'top_c_block_bg' => 'uk-block-default',
+		'top_c_block_padding' => '',
+		'top_c_container_width' => 'uk-container uk-container-center',
+		'top_c_block_divider' => false,
+		'top_c_block_contrast' => false,
+		
+		'top_d_block_bg' => 'uk-block-default',
+		'top_d_block_padding' => '',
+		'top_d_container_width' => 'uk-container uk-container-center',
+		'top_d_block_divider' => false,
+		'top_d_block_contrast' => false,
+		
+		'main_block_bg' => 'uk-block-default',
+		'main_block_padding' => '',
+		'main_container_width' => 'uk-container uk-container-center',
+		'main_block_divider' => false,
+		'main_block_contrast' => false,
 		
 		'bottom_block_bg' => 'uk-block-default',
 		'bottom_block_padding' => '',
@@ -141,6 +178,7 @@ return [
         'header_sticky' => 'animated',
         'footer_layout' => 'centered',
         'footer_fixed' => true,
+		'breadcrumbs' => false,
         'totop_scroller' => true
 
     ],
@@ -177,6 +215,7 @@ return [
             $classes = [
                 'navbar' => 'tm-navbar',
                 'hero' => '',
+				'image-alt' => '',
                 'parallax' => ''
             ];
 
@@ -204,7 +243,7 @@ return [
             }
 
             if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
-                $classes['parallax'] = 'data-uk-parallax="{bg: \'-400\'}"';
+                $classes['parallax'] = 'data-uk-parallax="{bg: \'-400\'}"';//250
             }
 
             if ($params['hero_contrast'] && $params['hero_image']) {
@@ -215,16 +254,17 @@ return [
                 $classes['hero'] .= ' '.$params['hero_style'];
             }
 
-            if ($params['hero_blend'] && $params['hero_image']) {
-                $classes['hero'] .= ' tm-background-blend-'.$params['hero_blend'];
+            if ($params['image_alt_style']) {
+                $classes['image-alt'] = ' '.$params['image_alt_style'];
             }
 
-            if ($params['hero_parallax'] && $view->position()->exists('hero') && $params['hero_image']) {
-                $classes['parallax'] = 'data-uk-parallax="{bg: \'-250\'}"';
+            if ($params['image_alt_blend'] && $params['image_alt']) {
+                $classes['image-alt'] .= ' tm-background-blend-'.$params['image_alt_blend'];
             }
+			
 
-            if ($params['hero_contrast'] && $params['hero_image']) {
-                $classes['hero'] .= ' uk-contrast';
+            if ($params['contrast_alt'] && $params['image_alt']) {
+                $classes['image-alt'] .= ' uk-contrast';
             }
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';

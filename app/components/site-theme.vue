@@ -90,6 +90,13 @@
                 <label><input type="checkbox" v-model="config.totop_scroller"> {{ 'Enable a to-top scroller.' | trans }}</label>
             </div>
         </div>
+		
+		<div class="uk-form-row">
+            <span class="uk-form-label">{{ 'Breadcrumbs' | trans }}</span>
+            <div class="uk-form-controls uk-form-controls-text">
+                <label><input type="checkbox" v-model="config.breadcrumbs"> {{ 'Enable a breadcrumbs.' | trans }}</label>
+            </div>
+        </div>
 
     </div>
 

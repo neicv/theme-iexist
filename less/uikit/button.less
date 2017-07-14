@@ -78,6 +78,11 @@
 @button-primary-hover-border:                   @button-primary-hover-background;
 @button-primary-active-border:                  @button-primary-active-background;
 
+@button-active-shadow:                          inset 2px 2px 6px fade(@global-shadow, 15%);
+@button-primary-active-shadow:                  inset 2px 2px 6px fade(@global-primary-shadow, 10%);
+@button-success-active-shadow:                  inset 2px 2px 6px fade(@global-success-shadow, 10%);
+@button-danger-active-shadow:                   inset 2px 2px 6px fade(@global-danger-shadow, 10%);
+
 
 // Component
 // ========================================================================
@@ -94,8 +99,12 @@
 
 .hook-button-hover() { border-color: @button-border-hover-color; }
 
-.hook-button-active() { border-color: @button-border-active-color; }
-
+//.hook-button-active() { border-color: @button-border-active-color; }
+.hook-button-active() {
+    box-shadow: @button-active-shadow;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
 
 // Color modifiers
 // ========================================================================
@@ -104,31 +113,31 @@
 // Modifier: `uk-button-primary`
 //
 
-.hook-button-primary() { border-color: @button-primary-border; }
+.hook-button-primary() {}
 
-.hook-button-primary-hover() { border-color: @button-primary-hover-border; }
+.hook-button-primary-hover() {}
 
-.hook-button-primary-active() { border-color: @button-primary-active-border; }
+.hook-button-primary-active() { box-shadow: @button-primary-active-shadow; }
 
 //
 // Modifier: `uk-button-success`
 //
 
-.hook-button-success() { border-color: @global-success-background; }
+.hook-button-success() {}
 
-.hook-button-success-hover() { border-color: transparent; }
+.hook-button-success-hover() {}
 
-.hook-button-success-active() { border-color: transparent; }
+.hook-button-success-active() { box-shadow: @button-success-active-shadow; }
 
 //
 // Modifier: `uk-button-danger`
 //
 
-.hook-button-danger() { border-color: @global-danger-background; }
+.hook-button-danger() {}
 
-.hook-button-danger-hover() { border-color: transparent; }
+.hook-button-danger-hover() {}
 
-.hook-button-danger-active() { border-color: transparent; }
+.hook-button-danger-active() { box-shadow: @button-danger-active-shadow; }
 
 
 // Disabled state
@@ -140,8 +149,18 @@
 // Modifier: `uk-button-link`
 // ========================================================================
 
-.hook-button-link() {}
+.hook-button-link() {
 
+    box-shadow: none;
+
+    // Hover
+    &:hover { text-decoration: none; }
+
+    // Onclick
+    &:active,
+    &:focus { outline: none; }
+
+}
 
 // Size modifiers
 // ========================================================================
@@ -153,6 +172,16 @@
 // ========================================================================
 
 .hook-button-misc() {
+
+	// Onclick
+    .uk-button:active {
+        -webkit-filter: @button-active-filter;
+        filter: @button-active-filter;
+    }
+
+    // Paddings
+    .uk-button-small { padding: 0 @button-small-padding-horizontal; }
+    .uk-button-mini { padding: 0 @button-mini-padding-horizontal; }
 
     /* Sub-object `uk-button-group`
      ========================================================================== */

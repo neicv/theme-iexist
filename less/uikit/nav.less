@@ -74,6 +74,7 @@
 @nav-dropdown-active-color:                     @global-color;
 @nav-offcanvas-padding-horizontal:              @global-margin;
 @nav-offcanvas-sub-padding-left:                @global-margin-large;
+@nav-active-filter:                             @global-active-filter; 
 
 
 // Sub-object: `uk-nav-header`
@@ -114,7 +115,10 @@
 // Items
 //
 
-.hook-nav-side() { padding: @nav-padding-vertical @nav-side-padding-horizontal; }
+.hook-nav-side() {
+    padding: @nav-padding-vertical @nav-side-padding-horizontal;
+    border-top: 1px solid @global-border;
+}
 
 // Hover
 .hook-nav-side-hover() {}
@@ -133,7 +137,6 @@
 //
 
 .hook-nav-side-divider() {}
-
 
 // Modifier `uk-nav-dropdown`
 // ========================================================================

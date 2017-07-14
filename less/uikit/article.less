@@ -29,6 +29,9 @@
 // New
 //
 
+@article-border-width:                          @global-border-width;
+@article-border:                                @global-border;
+
 @article-padding:                               40px;
 @article-large-padding:                         70px;
 @article-large-margin-top:                      45px;
@@ -76,8 +79,13 @@
 .hook-article-misc() {
 
     .uk-article {
-        padding: @article-padding;
+        //padding: @article-padding;
         background: @global-background;
+    }
+	
+	.uk-article + .uk-article {
+        padding-top: @article-margin-top;
+        border-top: @article-border-width solid @article-border;
     }
 
     /* Tablet and bigger */

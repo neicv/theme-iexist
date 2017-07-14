@@ -24,6 +24,7 @@
 @global-inverse-color:                          #fff;
 
 @global-link-color:                             #536a90;
+@global-link-color-alt:							#edc64a;
 @global-link-hover-color:                       #222;
 //@global-secondary-color:                        #4c368b;
 @global-secondary-color:                        fade(@global-secondary-highlight-color, 50%);
@@ -41,8 +42,9 @@
 @global-font-family:                            'Lora', Open Sans, Times New Roman, serif;
 @global-alternate-font-family:                  'Lato', Helvetica, Arial, sans-serif;
 
-@global-font-size:                              14px;
+@global-font-size:                              16px;
 @global-line-height:                            26px;
+@global-font-weight:                            400;
 
 //
 // Box-Shadows
@@ -57,17 +59,16 @@
 // Typography
 //
 
-//@global-font-family:                            Nunito Sans;
+
 @global-body-font-family:                       'Lato', Open Sans, Arial, sans-serif;;
 @global-alt-font-family:                        'Lora', Helvetica, Arial, sans-serif;;
-@global-alt-1-font-family:                      'Montserrat', Helvetica, Arial, sans-serif;
-@global-alt-2-font-family:                      'Lora', Helvetica, Arial, sans-serif;
+@global-alt-1-font-family:                      'Roboto', Helvetica, Arial, sans-serif;
+@global-alt-2-font-family:                      'Open Sans', Helvetica, Arial, sans-serif;
 @global-font-weight:                            normal;
 @global-letter-spacing:                         2px;
 @global-text-transform:                         uppercase;
 
-@global-font-size:                              17px;
-@global-line-height:                            1.58;      // 27px
+@global-line-height:                            27px;//1.58;      // 27px
 
 @global-alt-1-font-weight:                      400;
 @global-alt-2-font-weight:                      400;
@@ -75,13 +76,22 @@
 @global-alt-1-letter-spacing:                   0;
 @global-alt-2-text-transform:                   @global-text-transform;
 @global-alt-2-letter-spacing:                   @global-letter-spacing;
+
 @global-ui-font-size:                           12px;
+
+@global-h1-font-size:                           54px;
+@global-h1-line-height:                         58px;
+@global-h3-font-size:                           26px;
+@global-h3-line-height:                         30px;
+
 
 @global-xxlarge-font-size:                      46px;
 @global-xlarge-font-size:                       38px;
 @global-large-font-size:                        32px;
 @global-medium-font-size:                       26px;
 @global-small-font-size:                        14px;
+
+@global-h3-font-size:                           26px;
 
 @global-primary-font-family:                    inherit;
 @global-primary-font-weight:                    300;
@@ -95,7 +105,10 @@
 @global-secondary-letter-spacing:               inherit;
 @global-secondary-font-style:                   inherit;
 
+@global-heading-font-weight:                    400;
+@global-bold-font-weight:                       700;
 
+@global-link-hover-text-decoration:             none;//line-through;
 
 
 //
@@ -133,6 +146,44 @@
 @global-primary-border:                         desaturate(darken(@global-primary-background, 8%), 8%);
 @global-primary-hover-border:                   desaturate(darken(@global-primary-background, 15%), 8%);
 
+
+//
+// Success, Warning, Danger
+//
+
+//@global-success-background:                     #80D899;
+//@global-success-hover-background:               desaturate(darken(@global-success-background, 5%), 5%);
+//@global-success-active-background:              desaturate(darken(@global-success-background, 8%), 5%);
+@global-success-shadow:                         fade(desaturate(darken(@global-success-active-background, 20%), 10%), 20%);
+
+@global-success-color:                          #5EAE6B;
+
+//@global-warning-background:                     #FF915D;
+@global-warning-hover-background:               desaturate(darken(@global-warning-background, 3%), 5%);
+@global-warning-active-background:              desaturate(darken(@global-warning-background, 12%), 8%);
+@global-warning-shadow:                         fade(desaturate(darken(@global-warning-active-background, 20%), 15%), 20%);
+
+@global-warning-color:                          #F58951;
+
+//@global-danger-background:                      #F66F6F;
+//@global-danger-hover-background:                desaturate(darken(@global-danger-background, 5%), 5%);
+//@global-danger-active-background:               desaturate(darken(@global-danger-background, 8%), 8%);
+@global-danger-shadow:                          fade(desaturate(darken(@global-danger-active-background, 10%), 15%), 40%);
+
+@global-danger-color:                           #E94848;
+
+
+@global-active-filter:                          blur(1px);
+@global-shadow:                                 rgba(71,71,85,1);
+@global-primary-shadow:                         rgba(139,90,0,1);
+@button-active-filter:                          @global-active-filter;
+@global-secondary-hover-background:             desaturate(lighten(@global-secondary-background, 3%), 3%);
+@global-secondary-active-background:            saturate(darken(@global-secondary-background, 4%), 3%);
+@global-warning-active-background:              desaturate(darken(@global-warning-background, 12%), 8%);
+@global-success-shadow:                         fade(desaturate(darken(@global-success-active-background, 20%), 10%), 20%);
+@global-danger-shadow:                          fade(desaturate(darken(@global-danger-active-background, 10%), 15%), 40%);
+@global-warning-shadow:                         fade(desaturate(darken(@global-warning-active-background, 20%), 15%), 20%);
+
 //
 // Spacings
 //
@@ -142,7 +193,7 @@
 @global-small-margin:                           10px;
 @global-medium-margin:                          40px;
 @global-margin-large:                           35px;
-@global-xlarge-margin:                          130px;
+@global-margin-xlarge:                          60px;
 @global-margin-small:                           15px;
 
 @global-grid-gutter:                            25px;

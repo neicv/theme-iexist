@@ -24,7 +24,8 @@
 
         })($('#tm-main'));
 		
-		$('[data-uk-nav-follower]').each(function(){
+		
+		/* $('[data-uk-nav-follower]').each(function(){
 
             var ele      = $(this),
                 follower = $('<div class="tm-dotnav-follower"></div>').prependTo(this),
@@ -55,6 +56,12 @@
                     height: inviews.length * inviews[0].outerHeight(true) - parseInt(inviews[0].css('margin-top'))
                 });
 
+            });
+        }); */
+		
+		$('[data-tw]', '#tm-top').each(function() {
+            UIkit.scrollspy(this).on('inview.uk.scrollspy', function() {
+                Typewrite(this);
             });
         });
 
