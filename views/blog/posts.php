@@ -1,16 +1,35 @@
 <?php $view->script('posts', 'blog:app/bundle/posts.js', 'vue') ?>
 
+<?php $bimage = false; ?>
 <?php foreach ($posts as $post) : ?>
 <article class="uk-article tm-article-blog tm-font-alt-1 tm-block-padding-collapse">
 
+   
     <?php if ($image = $post->get('image.src')): ?>
+
+    <?php if ($params['chess_blog'] ) : ?>     
+    <?php $bimage = !$bimage ?>
+    <?php endif ?>
+  
     <div class="uk-grid uk-grid-xlarge uk-grid-width-medium-1-2" data-uk-grid-match="{target:'.uk-panel'}">
 
+
+        <div class="<?php if ($bimage == false) echo 'uk-flex-order-last-medium'; ?>">
+        
+            <div class="uk-panel tm-article-image uk-display-block" style="background: url('<?= $view->url($image) ?>') #FFF 50% 10% no-repeat; background-size: cover;">
+
+                <a class="uk-position-cover" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>">
+                    <img class="uk-invisible" src="<?= $image ?>" alt="<?= $post->get('image.alt') ?>">
+
+                </a>
+            </div>
+        </div>
+       
         <div class="uk-flex uk-flex-center uk-flex-middle">
             <div class="uk-panel">
 
                 <p class="uk-article-meta">
-                    <?= __('Written by %name% on %date%', ['%name%' => $post->user->name, '%date%' => '<time datetime="'.$post->date->format(\DateTime::W3C).'" v-cloak>{{ "'.$post->date->format(\DateTime::W3C).'" | date "longDate" }}</time>' ]) ?>
+                    <?= __('%date%', ['%date%' => '<time datetime="'.$post->date->format(\DateTime::W3C).'" v-cloak>{{ "'.$post->date->format(\DateTime::W3C).'" | date "longDate" }}</time>' ]) ?>
                 </p>
 
                 <h1 class="uk-article-title">
@@ -25,7 +44,7 @@
 
                 <p>
                     <?php if (isset($post->readmore) && $post->readmore || $post->excerpt) : ?>
-                    <a class="uk-button uk-button-link tm-article-button-link" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= __('Read more') ?></a></li>
+                    <a class="uk-button uk-button-link tm-article-button-link" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= __('Read more') ?></a>
                     <?php endif ?>
 
                     <?php if ($post->isCommentable() || $post->comment_count) : ?>
@@ -35,19 +54,8 @@
 
             </div>
         </div>
-
-        <div>
-            <div class="uk-panel tm-article-image" style="background: url('<?= $view->url($image) ?>') #FFF 50% 50% no-repeat; background-size: cover;">
-
-                <a class="uk-position-cover" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>">
-                    <img class="uk-invisible" src="<?= $image ?>" alt="<?= $post->get('image.alt') ?>">
-
-                </a>
-            </div>
-        </div>
-
     </div>
-
+    
     <?php else : ?>
 
     <h1 class="uk-article-title">

@@ -98,6 +98,13 @@
             </div>
         </div>
 
+    	<div class="uk-form-row">
+            <span class="uk-form-label">{{ 'Chess Blog' | trans }}</span>
+            <div class="uk-form-controls uk-form-controls-text">
+                <label><input type="checkbox" v-model="config.chess_blog"> {{ 'Enable a chess blog.' | trans }}</label>
+            </div>
+        </div>
+
     </div>
 
 </template>

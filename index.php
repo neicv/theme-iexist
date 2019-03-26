@@ -179,7 +179,8 @@ return [
         'footer_layout' => 'centered',
         'footer_fixed' => true,
 		'breadcrumbs' => false,
-        'totop_scroller' => true
+        'totop_scroller' => true,
+        'chess_blog' => true
 
     ],
 
@@ -204,6 +205,13 @@ return [
         /**
          * Custom markup calculations based on theme settings
          */
+		 
+		'view.meta' => [function ($event, $meta) use ($app) {
+
+            $meta->add('description', $meta->get('og:description'));
+
+        }, -20],
+		
         'view.layout' => function ($event, $view) use ($app) {
 
             if ($app->isAdmin()) {

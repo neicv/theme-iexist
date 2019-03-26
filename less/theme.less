@@ -26,6 +26,8 @@
 @container-small-max-width:             900px;
 @container-large-max-width:             1600px;
 
+@theme-container-xxlarge-max-width:                    1900px;
+
 @container-padding-horizontal:          15px;
 @container-padding-horizontal-s:        @global-gutter;
 @container-padding-horizontal-m:        @global-medium-gutter;
@@ -454,6 +456,19 @@ html { overflow-y: scroll; }
     background: @navbar-background;
     z-index: 1;
 } 
+.tm-navbar,
+.tm-navbar-content { max-width: @theme-container-xxlarge-max-width; }
+
+.tm-navbar-left,
+.tm-navbar-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+.tm-navbar-left {left: 0;}
+.tm-navbar-right {right: 0;}
+
+
 
 /* Navbar as overlay */
 .tm-navbar-overlay:not(.uk-active) {
@@ -601,25 +616,46 @@ html { overflow-y: scroll; }
 // ==========================================================================
 
 // Spacing to each other
+
+.tm-article-blog {
+
+    // Image
+    .tm-article-image { min-height: 360px; }
+
     // Blog image large (not left or right aligned)
-    .tm-article-image-large { max-height: 360px; }
-	
-	//.tm-article-image { max-height: 360px; }
+    .tm-article-image-large { max-height: 460px; min-height: 420px; }
 
+    // Spacing to each other
+    + .tm-article-blog {
+        margin-top: @global-margin-large;
+        padding-top: @global-margin-large;
+    }
 
-.tm-article-blog + .tm-article-blog {
-    margin-top: @global-margin-large;
-    padding-top: @global-margin-large;
+    // Title
+    .tm-article-title {
+        margin-top: @global-margin-small;
+        margin-bottom: @global-margin-large;
+    }
+
+    // Meta
+    .tm-article-meta { margin-bottom: @global-margin-small; }
+
+    // Icon for comment link
+    .tm-button-comment::before { content: '\e076'; }
+
 }
 
-// Blog style on medium to large view ports
-@media (min-width: @breakpoint-medium) {
 
+// Blog style on medium to large view ports
+@media (min-width: @breakpoint-small-max) {
+
+    // Content
+    .tm-article-blog .tm-article-content { padding: @global-margin @global-margin-extra-large 0 @global-margin-extra-large; }
 
     // Spacing to each other
     .tm-article-blog + .tm-article-blog {
-        margin-top: @global-margin-xlarge;
-        padding-top: @global-margin-xlarge;
+        margin-top: @global-margin-extra-large;
+        padding-top: @global-margin-extra-large;
     }
 
 }
@@ -1018,7 +1054,13 @@ html { overflow-y: scroll; }
     margin-right: @global-margin;
 }
 
+.tm-mainpagespan {
 
+   span:empty {
+    margin-left: 30px;
+    display: inline-block;
+   }
+}
 
 //
 // Search

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
         <?= $view->render('head') ?>
  		<?php $view->style('theme', $params['style'] ? 'theme:css/theme.'.$params['style'].'.css' : 'theme:css/theme.css') ?>
         <?php $view->script('animatedtext', 'theme:js/animated-text.js', ['uikit']) ?>
@@ -21,8 +21,9 @@
             <?php endif ?>
 
             <?php if ($view->position()->exists('hero')) : ?>
-            <div id="tm-hero" class="tm-hero tm-header-container uk-block uk-block-large uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" <?= $params['hero_image'] ? "style=\"background-image: url('{$view->url($params['hero_image'])}');\"" : '' ?> <?= $params['classes.parallax'] ?>>
-                <div class="uk-container uk-container-center<?= $params['hero_width'] ? ' uk-width-1-1' : '' ?>">
+            <div id="tm-hero" class="tm-hero tm-header-container uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" <?= $params['hero_image'] ? "style=\"background-image: url('{$view->url($params['hero_image'])}');\"" : '' ?> <?= $params['classes.parallax'] ?>>
+                <!--<div class="uk-container uk-container-center< ?= $params['hero_width'] ? ' uk-width-1-1' : '' ?>">-->
+				<div class="<?= $params['hero_width'] ? ' uk-width-1-1' : '' ?>">
 
                     <section class="uk-grid uk-grid-match" data-uk-grid-margin>
                         <?= $view->position('hero', 'position-grid.php') ?>
@@ -103,7 +104,7 @@
 								<!--<div class="tm-breadcrumb-centered">-->
 								<div class="tm-breadcrumb">
 								<?= $view->position('breadcrumbs', 'position-blank.php') ?>
-								<!--<?= $view->render('breadcrumbs') ?>-->
+								<!--< ?= $view->render('breadcrumbs') ?>-->
 								</div>
 							<?php endif ?>
 							<?= $view->render('content') ?>
@@ -113,6 +114,7 @@
 							<?= $view->position('sidebar', 'position-panel.php') ?>
 						</aside>
 						<?php endif ?>
+					</section>
 				</div>
 			</div>
 	

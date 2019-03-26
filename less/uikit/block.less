@@ -8,6 +8,7 @@
 // ========================================================================
 
 @block-padding-vertical:                        50px;
+@block-padding-vertical-small:                  20px;
 @block-padding-vertical-large:                  100px;
 
 @block-large-padding-vertical-large:            200px;
@@ -22,6 +23,7 @@
 //
 
 @block-padding-horizontal:                      30px;
+@block-small-padding-horizontal:                0px;
 @block-xlarge-padding-horizontal:               100px;
 @block-secondary-background:                    @global-secondary-background;
 
@@ -32,6 +34,7 @@
 .hook-block() {
     padding-left: @block-padding-horizontal;
     padding-right: @block-padding-horizontal;
+
 }
 
 // Color modifier
@@ -50,6 +53,19 @@
 // ========================================================================
 
 .hook-block-misc() {
+
+
+    
+    /* Phone landscape and smaller */
+    @media (max-width: @breakpoint-medium) {
+
+        .uk-block { padding-left:   @block-small-padding-horizontal;
+                    padding-right:  @block-small-padding-horizontal;
+                    padding-top:    @block-padding-vertical-small;
+                    padding-bottom: @block-padding-vertical-small;
+        }
+
+    }
 
     /*
      * Adjust padding between equal colored blocks

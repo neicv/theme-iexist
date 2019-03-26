@@ -59,7 +59,8 @@
             });
         }); */
 		
-		$('[data-tw]', '#tm-top').each(function() {
+		//$('[data-tw]', '#tm-top').each(function() {
+		$('[data-tw]').each(function() {
             UIkit.scrollspy(this).on('inview.uk.scrollspy', function() {
                 Typewrite(this);
             });

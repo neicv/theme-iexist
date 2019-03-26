@@ -188,16 +188,30 @@
 // Spacings
 //
 
+
+
+@global-grid-gutter:                            25px;
+@global-grid-gutter-large:                      40px;
+@global-grid-gutter-small:                      15px;
+@global-primary-color:                          @global-link-color;
+@global-primary-link-color:                     #675642;
+
+@global-primary-muted-color:                    fade(saturate(darken(@global-primary-link-color, 10%), 10%), 70%);
+@global-primary-highlight-color:                #181822;
+
+@global-theme-icon-font-family:                 'theme-icons'; 
+@global-transition:                             all 0.12s ease-in-out;
+
 // Used in margin, section, list
 @global-margin:                                 25px;
 @global-small-margin:                           10px;
 @global-medium-margin:                          40px;
 @global-margin-large:                           35px;
+@global-margin-extra-large:                     60px;
 @global-margin-xlarge:                          60px;
 @global-margin-small:                           15px;
 
-@global-grid-gutter:                            25px;
-@global-grid-gutter-large:                      40px;
+
 
 //
 // Controls

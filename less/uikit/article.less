@@ -33,7 +33,8 @@
 @article-border:                                @global-border;
 
 @article-padding:                               40px;
-@article-large-padding:                         70px;
+@article-large-padding:                         20px;
+@article-small-padding:                         20px;
 @article-large-margin-top:                      45px;
 
 @article-title-large-font-size:                 42px;
@@ -86,6 +87,14 @@
 	.uk-article + .uk-article {
         padding-top: @article-margin-top;
         border-top: @article-border-width solid @article-border;
+    }
+
+
+    /* Phone landscape and smaller */
+    @media (max-width: @breakpoint-medium) {
+
+        .uk-article { padding: @article-small-padding; }
+
     }
 
     /* Tablet and bigger */

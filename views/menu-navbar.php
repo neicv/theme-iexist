@@ -4,7 +4,13 @@
 
     <?php foreach ($root->getChildren() as $node) : ?>
     <li class="<?= $node->hasChildren() ? 'uk-parent' : '' ?><?= $node->get('active') ? ' uk-active' : '' ?>" <?= ($root->getDepth() === 0 && $node->hasChildren()) ? 'data-uk-dropdown':'' ?>>
+	
+		<?php if ($node->path == '/home') : ?>
+		<a href="<?= $node->getUrl() ?>"><i class="uk-icon-home uk-icon-small uk-icon-justify"></i></a>
+		
+		<?php else : ?>
         <a href="<?= $node->getUrl() ?>"><?= $node->title ?></a>
+		<?php endif ?>
 
         <?php if ($node->hasChildren()) : ?>
 

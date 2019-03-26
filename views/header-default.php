@@ -1,11 +1,9 @@
 <div class="tm-container">
 
-	<div class="tm-navbar <?= $params['classes.header'] ?>" <?= $params['classes.sticky'] ?>>
+	<nav class="tm-navbar <?= $params['classes.header'] ?>" <?= $params['classes.sticky'] ?>>
 
-        <div class="uk-container">
+        <div class="uk-container uk-container-center uk-flex uk-flex-space-between">
 			
-			<nav class="uk-navbar">
-
 				<?php if ($params['logo'] || $params['title']) : ?>
 				<div class="uk-navbar-left">
 					<a class="tm-logo uk-navbar-brand uk-flex uk-flex-middle" href="<?= $view->url()->get() ?>">
@@ -19,7 +17,7 @@
 				<?php endif ?>
 
 				<?php if ($view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
-				<div class="uk-navbar-center">
+				<div class="uk-navbar-center uk-flex uk-flex-center uk-visible-large">
 					<?= $view->menu('main', 'menu-navbar.php') ?>
 					<?= $view->position('navbar', 'position-blank.php') ?>
 				</div>
@@ -69,8 +67,7 @@
 
 				</div>
 				<?php endif ?>
-				
-			</nav>
+
         </div>
-    </div>
+    </nav>
 </div>
