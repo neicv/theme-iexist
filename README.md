@@ -1,3 +1,5 @@
-# Cards Theme
+# i-exist Theme
 
-A great lifestyle theme to showcase images and start blogging.
+A Pagekit theme for site i-exist.ru
+
+with MORE advanced settings.
