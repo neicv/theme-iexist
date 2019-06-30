@@ -92,7 +92,7 @@
         </div>
 
 		<hr class="uk-article-divider">
-		<h3 class="uk-margin-remove">Main {{ 'Position' | trans }}</h3>
+		<h3 id='main_img' class="uk-margin-remove">Main {{ 'Position' | trans }}</h3>
         
 	
         <div class="uk-form-row">
@@ -136,6 +136,7 @@
 		<hr class="uk-article-divider">
 		<h2 class="uk-margin-remove">{{ 'Position Appearance' | trans }}</h2>
 		<p>{{ 'Choose the appearance settings for each position.' | trans }}</p>
+
 		<div class="uk-form-row">
 		<table class="uk-table uk-table-middle tm-width uk-text-center">
 			<thead>
@@ -144,21 +145,25 @@
 					<th class="uk-text-center">{{ 'Background' | trans }}</th>
 					<th class="uk-text-center">{{ 'Padding' | trans }}</th>
 					<th class="uk-text-center">{{ 'Block width' | trans }}</th>
+					<th class="uk-text-center">{{ 'Full height' | trans }}</th>
+					<th class="uk-text-center">{{ 'Vertical center' | trans }}</th>
 					<th class='uk-text-center'>{{ 'Divider' | trans }}</th>
 					<th class='uk-text-center'>{{ 'Contrast' | trans }}</th>
+					<th class='uk-text-center'>{{ 'Image' | trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
-			
-			
-				<tr>
+
+				<tr v-for="(key, val) in node.theme.block">
 					<td class="uk-width-1-10 uk-text-left">
 					
-					<label for="form-top-style" class="uk-form-label">{{ 'Top A' | trans }}</label>
+					<!--<label for="form-top-style" class="uk-form-label">{{ 'Top A' | trans }}</label>-->
+					<label for="form-top-style" class="uk-form-label" v-text="key | warp"></label>
+
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-top-block-bg" class="uk-form-width-medium" v-model="node.theme.top_block_bg">
+							<select id="form-top-block-bg" class="uk-form-width-medium" v-model="val.block_bg">
 								<option value="uk-block-default">{{ 'Default' | trans }}</option>
 								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
 								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
@@ -168,7 +173,7 @@
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-top-block-padding" class="uk-form-width-medium" v-model="node.theme.top_block_padding">
+							<select id="form-top-block-padding" class="uk-form-width-medium" v-model="val.block_padding">
 								<option value="">{{ 'Default' | trans }}</option>
 								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
 								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
@@ -177,22 +182,104 @@
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-top-container-width" class="uk-form-width-medium" v-model="node.theme.top_container_width">
+							<select id="form-top-container-width" class="uk-form-width-medium" v-model="val.container_width">
 								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
 								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
 								<option value="">{{ 'Full width' | trans }}</option>
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
 						<p class="uk-form-controls-condensed">
-							<label><input type="checkbox" v-model="node.theme.top_block_divider"></label>
+							<label><input type="checkbox" v-model="val.block_fullheight"></label>
 						</p>
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
-							<label><input type="checkbox" v-model="node.theme.top_block_contrast"></label>
+							<label><input type="checkbox" v-model="val.block_middle"></label>
 						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="val.block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="val.block_contrast"></label>
+						</p>
+					</td>
+					<td>
+ 						<div v-if="key === 'main'" class="uk-form-controls-condensed uk-form-small uk-text-left">
+							<a class="uk-text-center uk-display-block uk-margin-remove uk-link-muted" :href="$url.route('admin/site/page/edit', {id: node.id, active: 1}) + '#main_img'">
+								<img width="50" height="50" :alt="'Placeholder Image' | trans" v-if="node.theme.image_alt" :src="$url.route(node.theme.image_alt)">
+								<img width="50" height="50" :alt="'Placeholder Image' | trans" v-else :src="$url('app/system/assets/images/placeholder-image.svg')">
+    						</a>
+						</div>
+						<div v-else class="uk-form-controls-condensed uk-form-small uk-text-left">
+							<input-image-theme :source.sync="val.block_image"></input-image-theme>
+						</div>
+					</td>
+				</tr>
+
+			
+				<!-- <tr>
+					<td class="uk-width-1-10 uk-text-left">
+					
+					<label for="form-top-style" class="uk-form-label">{{ 'Top A' | trans }}</label>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-top-block-bg" class="uk-form-width-medium" v-model="node.theme.block.top_a.block_bg">
+								<option value="uk-block-default">{{ 'Default' | trans }}</option>
+								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
+								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
+								<option value="uk-block-secondary">{{ 'Secondary' | trans }}</option>
+							 </select>
+						</div>				 
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-top-block-padding" class="uk-form-width-medium" v-model="node.theme.block.top_a.block_padding">
+								<option value="">{{ 'Default' | trans }}</option>
+								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
+								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<div class="uk-form-controls-condensed">
+							<select id="form-top-container-width" class="uk-form-width-medium" v-model="node.theme.block.top_a.container_width">
+								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
+								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
+								<option value="">{{ 'Full width' | trans }}</option>
+							</select>
+						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.block.top_a.block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.block.top_a.block_middle"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.block.top_a.block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.block.top_a.block_contrast"></label>
+						</p>
+					</td>
+					<td>
+ 						<div class="uk-form-controls-condensed uk-form-small uk-text-left">
+							<input-image-theme :source.sync="node.theme.block.top_a.block_image"></input-image-theme>
+						</div>
 					</td>
 				</tr>
 			
@@ -229,7 +316,17 @@
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_b_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_b_block_middle"></label>
+						</p>
+					</td>
+					<td>
 						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.top_b_block_divider"></label>
 						</p>
@@ -238,6 +335,11 @@
 						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.top_b_block_contrast"></label>
 						</p>
+					</td>
+					<td>
+ 						<div class="uk-form-controls-condensed uk-form-small uk-text-left">
+							<input-image-theme :source.sync="node.theme.top_b_block_image"></input-image-theme>
+						</div>
 					</td>
 				</tr>
 			
@@ -274,7 +376,17 @@
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_c_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_c_block_middle"></label>
+						</p>
+					</td>
+					<td>
 						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.top_c_block_divider"></label>
 						</p>
@@ -319,7 +431,17 @@
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_d_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.top_d_block_middle"></label>
+						</p>
+					</td>
+					<td>
 						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.top_d_block_divider"></label>
 						</p>
@@ -365,7 +487,17 @@
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.main_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.main_block_middle"></label>
+						</p>
+					</td>
+					<td>	
 						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.main_block_divider"></label>
 						</p>
@@ -384,7 +516,7 @@
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-bottom-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_block_bg">
+							<select id="form-bottom-a-block-bg" class="uk-form-width-medium" v-model="node.theme.bottom_a_block_bg">
 								<option value="uk-block-default">{{ 'Default' | trans }}</option>
 								<option value="uk-block-muted">{{ 'Muted' | trans }}</option>
 								<option value="uk-block-primary">{{ 'Primary' | trans }}</option>
@@ -394,7 +526,7 @@
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-bottom-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_block_padding">
+							<select id="form-bottom-a-block-padding" class="uk-form-width-medium" v-model="node.theme.bottom_a_block_padding">
 								<option value="">{{ 'Default' | trans }}</option>
 								<option value=" uk-block-large">{{ 'Large' | trans }}</option>
 								<option value=" tm-block-padding-collapse">{{ 'None' | trans }}</option>
@@ -403,21 +535,31 @@
 					</td>
 					<td>
 						<div class="uk-form-controls-condensed">
-							<select id="form-bottom-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_container_width">
+							<select id="form-bottom-a-container-width" class="uk-form-width-medium" v-model="node.theme.bottom_a_container_width">
 								<option value="uk-container uk-container-center">{{ 'Default' | trans }}</option>
 								<option value="uk-container uk-container-center tm-container-small">{{ 'Small' | trans }}</option>
 								<option value="">{{ 'Full width' | trans }}</option>
 							</select>
 						</div>
 					</td>
-					<td class='uk-text-center'>
+					<td>
 						<p class="uk-form-controls-condensed">
-							<label><input type="checkbox" v-model="node.theme.bottom_block_divider"></label>
+							<label><input type="checkbox" v-model="node.theme.bottom_a_block_fullheight"></label>
 						</p>
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
-							<label><input type="checkbox" v-model="node.theme.bottom_block_contrast"></label>
+							<label><input type="checkbox" v-model="node.theme.bottom_a_block_middle"></label>
+						</p>
+					</td>
+					<td class='uk-text-center'>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_a_block_divider"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_a_block_contrast"></label>
 						</p>
 					</td>
 				</tr>
@@ -454,6 +596,16 @@
 								<option value="">{{ 'Full width' | trans }}</option>
 							</select>
 						</div>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_b_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_b_block_middle"></label>
+						</p>
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
@@ -499,6 +651,16 @@
 								<option value="">{{ 'Full width' | trans }}</option>
 							</select>
 						</div>
+					</td>
+					<td>
+					<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_c_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_c_block_middle"></label>
+						</p>
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
@@ -547,6 +709,16 @@
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_d_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.bottom_d_block_middle"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.bottom_d_block_divider"></label>
 						</p>
 					</td>
@@ -592,6 +764,16 @@
 					</td>
 					<td>
 						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.footer_block_fullheight"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
+							<label><input type="checkbox" v-model="node.theme.footer_block_middle"></label>
+						</p>
+					</td>
+					<td>
+						<p class="uk-form-controls-condensed">
 							<label><input type="checkbox" v-model="node.theme.footer_block_divider"></label>
 						</p>
 					</td>
@@ -600,7 +782,7 @@
 							<label><input type="checkbox" v-model="node.theme.footer_block_contrast"></label>
 						</p>
 					</td>
-				</tr>
+				</tr> -->
         	</tbody>
 		</table>
 		</div>
@@ -615,6 +797,8 @@
 
 <script>
 
+	require('./input-image-theme.vue');
+
     module.exports = {
 
         section: {
@@ -622,7 +806,31 @@
             priority: 90
         },
 
-        props: ['node']
+		props: ['node'],
+		
+	    //data: { 
+	  	//	positionStr:"",
+	  		
+  		//},
+
+		//computed: {
+        //    bottom_E_block_contrast: function () {
+        //        return this.node.theme.bottom_d_block_contrast 
+		//	}
+		//},
+
+		filters: {
+    		warp: function (myStr) {	
+
+				myStr = myStr[0].toUpperCase() + myStr.slice(1)
+				var myStr2 = myStr.split('_')
+      			myStr = myStr2[0]
+				if (myStr2.length - 1){
+      				myStr = myStr + ' ' + myStr2[myStr2.length - 1].toUpperCase()
+					}
+				return myStr
+    		},
+		},
 
     };
 

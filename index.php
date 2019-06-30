@@ -1,5 +1,7 @@
 <?php
-
+ $block_classes = array();
+ $d = '12';
+ //$a = array ('1','5','2');
 return [
 
     'name' => 'theme-iexist',
@@ -38,13 +40,13 @@ return [
 	    'header_social' => 'Header Social',
 		'header_info' => 'Header Info',
         'hero' => 'Hero',
-        'top' => 'Top A',
+        'top_a' => 'Top A',
 		'top_b' => 'Top B',
 		'top_c' => 'Top C',
 		'top_d' => 'Top D',
 		'breadcrumbs' => 'Breadcrumbs',
         'sidebar' => 'Sidebar',
-        'bottom' => 'Bottom A',
+        'bottom_a' => 'Bottom A',
 		'bottom_b' => 'Bottom B',
 		'bottom_c' => 'Bottom C',
 		'bottom_d' => 'Bottom D',
@@ -61,7 +63,9 @@ return [
     /**
      * Node defaults
      */
-    'node' => [
+    'node' =>
+        [
+        'block' => struta(),
 
         'title_hide' => false,
         'title_large' => false,
@@ -82,68 +86,90 @@ return [
 		'image_alt_style' => '',
 		'image_alt_blend' => '',
         'contrast_alt' => '',
-		
-		'top_block_bg' => 'uk-block-default',
-		'top_block_padding' => '',
-		'top_container_width' => 'uk-container uk-container-center',
-		'top_block_divider' => false,
-		'top_block_contrast' => false,
+        
+        
+        /*
+		'top_a_block_bg'            => 'uk-block-default',
+		'top_a_block_padding'       => '',
+        'top_a_container_width'     => 'uk-container uk-container-center',
+        'top_a_block_fullheight'    => false,
+        'top_a_block_middle'        => false,
+        'top_a_block_divider'       => false,
+        'top_a_block_contrast'      => false,
+        'top_a_block_image'         => '',
 		
 		'top_b_block_bg' => 'uk-block-default',
 		'top_b_block_padding' => '',
-		'top_b_container_width' => 'uk-container uk-container-center',
-		'top_b_block_divider' => false,
-		'top_b_block_contrast' => false,
+        'top_b_container_width' => 'uk-container uk-container-center',
+        'top_b_block_fullheight'    => false,
+        'top_b_block_middle'        => false,
+		'top_b_block_divider'       => false,
+		'top_b_block_contrast'      => false,
 		
 		'top_c_block_bg' => 'uk-block-default',
 		'top_c_block_padding' => '',
-		'top_c_container_width' => 'uk-container uk-container-center',
-		'top_c_block_divider' => false,
-		'top_c_block_contrast' => false,
+        'top_c_container_width' => 'uk-container uk-container-center',
+        'top_c_block_fullheight'    => false,
+        'top_c_block_middle'        => false,
+		'top_c_block_divider'       => false,
+		'top_c_block_contrast'      => false,
 		
 		'top_d_block_bg' => 'uk-block-default',
 		'top_d_block_padding' => '',
-		'top_d_container_width' => 'uk-container uk-container-center',
-		'top_d_block_divider' => false,
-		'top_d_block_contrast' => false,
+        'top_d_container_width' => 'uk-container uk-container-center',
+        'top_d_block_fullheight'    => false,
+        'top_d_block_middle'        => false,
+		'top_d_block_divider'       => false,
+		'top_d_block_contrast'      => false,
 		
 		'main_block_bg' => 'uk-block-default',
 		'main_block_padding' => '',
-		'main_container_width' => 'uk-container uk-container-center',
-		'main_block_divider' => false,
-		'main_block_contrast' => false,
+        'main_container_width' => 'uk-container uk-container-center',
+        'main_block_fullheight'     => false,
+        'main_block_middle'         => false,
+		'main_block_divider'        => false,
+		'main_block_contrast'       => false,
 		
-		'bottom_block_bg' => 'uk-block-default',
-		'bottom_block_padding' => '',
-		'bottom_container_width' => 'uk-container uk-container-center',
-		'bottom_block_divider' => false,
-		'bottom_block_contrast' => false,
+		'bottom_a_block_bg' => 'uk-block-default',
+		'bottom_a_block_padding' => '',
+        'bottom_a_container_width' => 'uk-container uk-container-center',
+        'bottom_a_block_fullheight' => false,
+        'bottom_a_block_middle'     => false,
+		'bottom_a_block_divider'    => false,
+		'bottom_a_block_contrast'   => false,
 		
 		'bottom_b_block_bg' => 'uk-block-default',
 		'bottom_b_block_padding' => '',
-		'bottom_b_container_width' => 'uk-container uk-container-center',
-		'bottom_b_block_divider' => false,
-		'bottom_b_block_contrast' => false,
+        'bottom_b_container_width' => 'uk-container uk-container-center',
+        'bottom_b_block_fullheight' => false,
+        'bottom_b_block_middle'     => false,
+		'bottom_b_block_divider'    => false,
+		'bottom_b_block_contrast'   => false,
 		
 		'bottom_c_block_bg' => 'uk-block-default',
 		'bottom_c_block_padding' => '',
-		'bottom_c_container_width' => 'uk-container uk-container-center',
-		'bottom_c_block_divider' => false,
-		'bottom_c_block_contrast' => false,
+        'bottom_c_container_width' => 'uk-container uk-container-center',
+        'bottom_c_block_fullheight' => false,
+        'bottom_c_block_middle'     => false,
+		'bottom_c_block_divider'    => false,
+		'bottom_c_block_contrast'   => false,
 		
-		'bottom_d_block_bg' => 'uk-block-default',// uk-contrast',
+		'bottom_d_block_bg' => 'uk-block-default',
 		'bottom_d_block_padding' => '',
-		'bottom_d_container_width' => 'uk-container uk-container-center',
-		'bottom_d_block_divider' => false,
-		'bottom_d_block_contrast' => false,
+        'bottom_d_container_width' => 'uk-container uk-container-center',
+        'bottom_d_block_fullheight' => false,
+        'bottom_d_block_middle'     => false,
+		'bottom_d_block_divider'    => false,
+		'bottom_d_block_contrast'   => false,
 		
-		'footer_block_bg' => 'uk-block-default',// uk-contrast',
+		'footer_block_bg' => 'uk-block-default',
 		'footer_block_padding' => '',
-		'footer_container_width' => 'uk-container uk-container-center',
-		'footer_block_divider' => false,
-		'footer_block_contrast' => false,
-
-        //'footer_style' => 'uk-block-secondary uk-contrast'
+        'footer_container_width' => 'uk-container uk-container-center',
+        'footer_block_fullheight'   => false,
+        'footer_block_middle'       => false,
+		'footer_block_divider'      => false,
+        'footer_block_contrast'     => false,
+        */
     ],
 
     /**
@@ -315,3 +341,29 @@ return [
     ]
 
 ];
+
+function struta()
+    {
+    $blocks = array('top_a', 'top_b', 'top_c', 'top_d', 'main', 'bottom_a', 'bottom_b', 'bottom_c', 'bottom_d', 'footer');
+    $structura = array();
+    $st_default = array(
+        'block_bg'          => 'uk-block-default',
+		'block_padding'     => '',
+        'container_width'   => 'uk-container uk-container-center',
+        'block_fullheight'  => false,
+        'block_middle'      => false,
+		'block_divider'     => false,
+        'block_contrast'    => false,
+        'block_image'       => '',
+    );
+
+    
+        foreach ($blocks as $block )
+        {
+            $structura[$block] = $st_default;
+            //$structura[] = [ $block => $st_default];
+        }
+
+        return $structura;
+        //return ['content' => 'Page not found'];
+    }
