@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.4 (July 01, 2018)
+
+### Add
+
+- more options for customize Block:
+    Full Hight
+    Vertical Center
+    Image for all Block
+
+### Changed
+
+- optimisation code output block
+
 ## 1.0.2 (March 12, 2018)
 
 ### Changed

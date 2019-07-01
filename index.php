@@ -79,97 +79,11 @@ return [
         'hero_viewport' => '',
         'hero_contrast' => '',
         'hero_parallax' => '',
-        //'top_style' => 'uk-block-muted',
-		//'main_style' => 'uk-block-default',
 		'image_alt_enable' => false,
 		'image_alt' => '',
 		'image_alt_style' => '',
 		'image_alt_blend' => '',
         'contrast_alt' => '',
-        
-        
-        /*
-		'top_a_block_bg'            => 'uk-block-default',
-		'top_a_block_padding'       => '',
-        'top_a_container_width'     => 'uk-container uk-container-center',
-        'top_a_block_fullheight'    => false,
-        'top_a_block_middle'        => false,
-        'top_a_block_divider'       => false,
-        'top_a_block_contrast'      => false,
-        'top_a_block_image'         => '',
-		
-		'top_b_block_bg' => 'uk-block-default',
-		'top_b_block_padding' => '',
-        'top_b_container_width' => 'uk-container uk-container-center',
-        'top_b_block_fullheight'    => false,
-        'top_b_block_middle'        => false,
-		'top_b_block_divider'       => false,
-		'top_b_block_contrast'      => false,
-		
-		'top_c_block_bg' => 'uk-block-default',
-		'top_c_block_padding' => '',
-        'top_c_container_width' => 'uk-container uk-container-center',
-        'top_c_block_fullheight'    => false,
-        'top_c_block_middle'        => false,
-		'top_c_block_divider'       => false,
-		'top_c_block_contrast'      => false,
-		
-		'top_d_block_bg' => 'uk-block-default',
-		'top_d_block_padding' => '',
-        'top_d_container_width' => 'uk-container uk-container-center',
-        'top_d_block_fullheight'    => false,
-        'top_d_block_middle'        => false,
-		'top_d_block_divider'       => false,
-		'top_d_block_contrast'      => false,
-		
-		'main_block_bg' => 'uk-block-default',
-		'main_block_padding' => '',
-        'main_container_width' => 'uk-container uk-container-center',
-        'main_block_fullheight'     => false,
-        'main_block_middle'         => false,
-		'main_block_divider'        => false,
-		'main_block_contrast'       => false,
-		
-		'bottom_a_block_bg' => 'uk-block-default',
-		'bottom_a_block_padding' => '',
-        'bottom_a_container_width' => 'uk-container uk-container-center',
-        'bottom_a_block_fullheight' => false,
-        'bottom_a_block_middle'     => false,
-		'bottom_a_block_divider'    => false,
-		'bottom_a_block_contrast'   => false,
-		
-		'bottom_b_block_bg' => 'uk-block-default',
-		'bottom_b_block_padding' => '',
-        'bottom_b_container_width' => 'uk-container uk-container-center',
-        'bottom_b_block_fullheight' => false,
-        'bottom_b_block_middle'     => false,
-		'bottom_b_block_divider'    => false,
-		'bottom_b_block_contrast'   => false,
-		
-		'bottom_c_block_bg' => 'uk-block-default',
-		'bottom_c_block_padding' => '',
-        'bottom_c_container_width' => 'uk-container uk-container-center',
-        'bottom_c_block_fullheight' => false,
-        'bottom_c_block_middle'     => false,
-		'bottom_c_block_divider'    => false,
-		'bottom_c_block_contrast'   => false,
-		
-		'bottom_d_block_bg' => 'uk-block-default',
-		'bottom_d_block_padding' => '',
-        'bottom_d_container_width' => 'uk-container uk-container-center',
-        'bottom_d_block_fullheight' => false,
-        'bottom_d_block_middle'     => false,
-		'bottom_d_block_divider'    => false,
-		'bottom_d_block_contrast'   => false,
-		
-		'footer_block_bg' => 'uk-block-default',
-		'footer_block_padding' => '',
-        'footer_container_width' => 'uk-container uk-container-center',
-        'footer_block_fullheight'   => false,
-        'footer_block_middle'       => false,
-		'footer_block_divider'      => false,
-        'footer_block_contrast'     => false,
-        */
     ],
 
     /**
@@ -302,7 +216,35 @@ return [
             }
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
-			
+            
+            
+            // mix classes for block
+
+            if ($blocks =  array_keys($params['block'])) {
+
+                $block_classes = array();
+
+                foreach ($blocks as $block) {
+
+                    $block_classes[$block]  = "uk-block ";
+                    $block_classes[$block] .= $params["block.{$block}.block_bg"];
+                    $block_classes[$block] .= $params["block.{$block}.block_padding"];
+                    $block_classes[$block] .= $params["block.{$block}.block_fullheight"] ? ' uk-height-viewport' : '';
+                    $block_classes[$block] .= $params["block.{$block}.block_middle"] ? ' tm-block-middle' : '';
+                    $block_classes[$block] .= $params["block.{$block}.block_divider"] ? ' tm-block-divider' : '';
+                    $block_classes[$block] .= $params["block.{$block}.block_contrast"] ? ' uk-contrast' : '';
+                    //$block_classes[$block] .= $params["block.{$block}.block-texture"] ? ' tm-block-texture' : '';
+
+                    $container_class[$block] = $params["block.{$block}.container_width"];
+
+                    $styles["$block"] = '';
+
+                    if ($params["block.{$block}.block_image"]) {
+                        $styles["$block"] = "style=\"background-image: url('{$view->url($params["block.{$block}.block_image"])}');\"" ;
+                        $block_classes[$block] .= ' uk-cover-background';
+                    }
+                }
+            }
 			
 			
 			// body classes
@@ -328,6 +270,8 @@ return [
 			
 
             $params['classes'] = $classes;
+            $params['block_classes'] =  $block_classes;
+            $params['styles'] = $styles;
         },
 
         'view.system/site/widget-menu' => function ($event, $view) {
