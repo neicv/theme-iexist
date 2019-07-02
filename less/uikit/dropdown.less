@@ -10,7 +10,7 @@
 @dropdown-z-index:                              (@global-z-index + 20);
 @dropdown-margin-top:                           10px;
 @dropdown-width:                                200px;
-@dropdown-background:                           @global-light-background;
+@dropdown-background:                           @global-background;
 @dropdown-color:                                @global-color;
 @dropdown-animation:                            uk-slide-bottom-fixed;
 
@@ -18,7 +18,7 @@
 @dropdown-divider-border-width:                 @global-border-width;
 
 @dropdown-navbar-margin:                        -(@global-grid-gutter-small);
-@dropdown-navbar-background:                    fade(@global-inverted-background, 98%);
+@dropdown-navbar-background:                    @global-nav-background;
 @dropdown-navbar-color:                         @global-secondary-color;
 @dropdown-navbar-animation:                     uk-slide-bottom-fixed;
 
@@ -28,13 +28,13 @@
 
 @dropdown-border-radius:                        @global-border-radius;
 
-@dropdown-navbar-divider-border:                rgba(255,255,255,0.06);
+@dropdown-navbar-divider-border:                @global-border;
 
 @dropdown-navbar-panel-link-color:              @global-link-color;
 @dropdown-navbar-panel-link-hover-color:        @global-link-hover-color;
 
-@dropdown-shadow:                               0 15px 45px rgba(0,0,0,0.1), 0 5px 20px rgba(0,0,0,0.1);
-@dropdown-navbar-shadow:                        none;
+@dropdown-shadow:                               0 9px 20px rgba(0,0,0,0.06), 0 2px 3px rgba(0,0,0,0.04);
+@dropdown-navbar-shadow:                        @dropdown-shadow;
 
 
 // Component

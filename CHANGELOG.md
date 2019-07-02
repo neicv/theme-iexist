@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.5 (July 02, 2018)
+
+### Changed
+
+- One background image default or alternative background image for the page (places between block Top-A and Bottom-D).
+- Position Main have self background image
+
+### Fixed
+
+- theme variables 
+
 ## 1.0.4 (July 01, 2018)
 
 ### Add

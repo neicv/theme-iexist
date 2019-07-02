@@ -36,7 +36,15 @@
         </div>
         <?php endif ?>
 
-		<!--< ?php var_dump ($params['styles.top_a'])?>-->
+		<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large <?= $params['classes.image-alt'] ?>" 
+			<?php if ($params['image_alt_enable']) : ?>
+			<?php if ($params['image_alt']) : ?>
+			<?= $params['image_alt'] ? "style=\"background-image: url('{$view->url($params['image_alt'])}');\"" : '' ?>
+				
+			<?php elseif ($params['image']) : ?>
+			<?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>
+			<?php endif ?>
+			<?php endif ?>>
 
 			<?php if ($view->position()->exists('top_a')) : ?>
 			<div id="tm-top-a" class="tm-block-top-a <?php echo $params['block_classes.top_a'];?>" <?php echo $params['styles.top_a']; ?>>
@@ -57,21 +65,7 @@
 				</div>
 			</div>
 			<?php endif ?>		
-	
-		<div class="uk-background-norepeat uk-cover-background uk-background-center-center uk-background-fixed uk-section uk-section-large <?= $params['classes.image-alt'] ?>" 
-			<?php if ($params['image_alt_enable']) : ?>
-			<?php if ($params['image_alt']) : ?>
-			<?= $params['image_alt'] ? "style=\"background-image: url('{$view->url($params['image_alt'])}');\"" : '' ?>
 				
-			<?php elseif ($params['image']) : ?>
-			<?= $params['image'] ? "style=\"background-image: url('{$view->url($params['image'])}');\"" : '' ?>
-			<?php endif ?>
-			<?php endif ?>>
-				
-			<!--<div class="tm-background">-->
-			
-
-			
 			<?php if ($view->position()->exists('top_c')) : ?>
 			<div id="tm-top-c" class="tm-block-top-c <?php echo $params['block_classes.top_c'];?>" <?php echo $params['styles.top_c']; ?>>
 				<div class="<?= $params['block.top_c.container_width'] ?>">
@@ -135,9 +129,6 @@
 				</div>
 			</div>
 			<?php endif ?>
-			
-			
-		</div> <!-- Background Image -->	
 		
 			<?php if ($view->position()->exists('bottom_c')) : ?>
 			<div id="tm-bottom-c" class="tm-block-bottom-c <?php echo $params['block_classes.bottom_c'];?>" <?php echo $params['styles.bottom_c']; ?>>
@@ -159,7 +150,7 @@
 			</div>
 			<?php endif ?>
 		
-
+		</div> <!-- Background Image -->	
 		
 		<?php if ($view->position()->exists('footer') || $view->position()->exists('footer_left')  || $view->position()->exists('footer_right') || $params['totop_scroller']) : ?>
 		

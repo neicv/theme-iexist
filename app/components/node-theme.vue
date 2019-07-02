@@ -92,7 +92,7 @@
         </div>
 
 		<hr class="uk-article-divider">
-		<h3 id='main_img' class="uk-margin-remove">Main {{ 'Position' | trans }}</h3>
+		<h3 id='main_img' class="uk-margin-remove">{{ 'Background' | trans }}</h3>
         
 	
         <div class="uk-form-row">
@@ -127,7 +127,7 @@
                     <label><input type="checkbox" v-model="node.theme.contrast_alt"> {{ 'Invert colors' | trans }}</label>
                 </p>
                 <p class="uk-form-controls-condensed uk-form-width-large"><input-image :source.sync="node.theme.image_alt"></input-image></p>
-                <p class="uk-form-help-block">{{ 'Select an alternative image for the page.' | trans }}</p>
+                <p class="uk-form-help-block">{{ 'Select an alternative background image for the page (places between block Top-A and Bottom-D).' | trans }}</p>
 				</span>
             </div>
         </div>
@@ -210,7 +210,8 @@
 						</p>
 					</td>
 					<td>
- 						<div v-if="key === 'main'" class="uk-form-controls-condensed uk-form-small uk-text-left">
+                    <!--  DEPRECATED
+                    <div v-if="key === 'main'" class="uk-form-controls-condensed uk-form-small uk-text-left">
 							<a class="uk-text-center uk-display-block uk-margin-remove uk-link-muted" :href="$url.route('admin/site/page/edit', {id: node.id, active: 1}) + '#main_img'">
 								<img width="50" height="50" :alt="'Placeholder Image' | trans" v-if="node.theme.image_alt" :src="$url.route(node.theme.image_alt)">
 								<img width="50" height="50" :alt="'Placeholder Image' | trans" v-else :src="$url('app/system/assets/images/placeholder-image.svg')">
@@ -218,7 +219,11 @@
 						</div>
 						<div v-else class="uk-form-controls-condensed uk-form-small uk-text-left">
 							<input-image-theme :source.sync="val.block_image"></input-image-theme>
-						</div>
+						</div> -->
+                    <!-- Backroud now betwen top-a TO bottom-d since 1.05-->
+                    <div class="uk-form-controls-condensed uk-form-small uk-text-left">
+						<input-image-theme :source.sync="val.block_image"></input-image-theme>
+					</div>
 					</td>
 				</tr>
         	</tbody>
