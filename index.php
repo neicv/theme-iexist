@@ -1,12 +1,39 @@
 <?php
- $block_classes = array();
- $d = '12';
- //$a = array ('1','5','2');
+
 return [
 
     'name' => 'theme-iexist',
 
     'type' => 'theme',
+
+    // dont work in Theme!
+    'autoload' => [
+
+		'Friendlyit\\iexist\\' => 'src'
+
+    ],
+
+    //work in Theme
+    /* 'routes' => [
+
+      
+		'/api/customizer' => [
+            'name' => '@customizer/api',
+            'controller' => 'Friendlyit\\iexist\\Controller\\CustomizerApiController'
+        ],
+     
+    ], */
+
+
+   /*  'nodes' => [
+
+        'customizer' => [
+			'name' => '@customizer',
+            'label' => 'Customizer',
+            'controller' => 'Friendlyit\\Search\\Controller\\SiteController',
+            'protected' => true
+        ]
+    ], */
 
     /**
      * Resources
@@ -14,7 +41,8 @@ return [
     'resources' => [
 
         'theme:' => '',
-        'views:' => 'views'
+        'views:' => 'views',
+        //'friendlyit/theme-iexist:' => ''
 
     ],
 
@@ -129,8 +157,18 @@ return [
      */
     'events' => [
 
+        /* Not Work
+        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
+            $view->script('customizer-theme', 'theme:app/bundle/customizer-theme.js', 'site-settings');
+            $view->data('$theme', $this);
+        },
+        */
+
         'view.system/site/admin/settings' => function ($event, $view) use ($app) {
             $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');
+            $view->script('customizer-theme', 'theme:app/bundle/customizer-theme.js', 'site-settings');
+            // How add style to customizer frame?
+            $view->style('customizer-theme', 'theme:assets/css/customizer.css');
             $view->data('$theme', $this);
         },
 

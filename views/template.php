@@ -114,7 +114,7 @@
 			<div id="tm-bottom-a" class="tm-block-bottom-a <?php echo $params['block_classes.bottom_a'];?>" <?php echo $params['styles.bottom_a']; ?>>
 				<div class="<?= $params['block.bottom_a.container_width'] ?>">
 					<section class="uk-grid uk-grid-match" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
-						<?= $view->position('bottom', 'position-grid.php') ?>
+						<?= $view->position('bottom_a', 'position-grid.php') ?>
 					</section>
 				</div>
 			</div>

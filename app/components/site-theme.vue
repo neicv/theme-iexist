@@ -105,11 +105,21 @@
             </div>
         </div>
 
+    	<!--<div class="uk-form-row">
+            <span class="uk-form-label">{{ 'Customizer' | trans }}</span>
+            <div class="uk-form-controls uk-form-controls-text">
+                <p><customizer-theme></Customizer-theme></p>
+            </div>
+        </div>-->
+
+
     </div>
 
 </template>
 
 <script>
+
+    //require('./customizer-theme.vue');
 
     module.exports = {
 
